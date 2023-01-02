@@ -20,16 +20,20 @@ public class PostService {
     private final PostEntityRepository postEntityRepository;
     private final UserEntityRepository userEntityRepository;
 
-    @Transactional
-    public void create(String title, String content, String userName){
 
-        // user find
+    /**
+     * TODO :: 해시태그 "#" 처리
+     * TODO :: 게시글 처리
+     * @param title
+     * @param content
+     * @param hashtag
+     * @param userName
+     */
+    @Transactional
+    public void create(String title, String content, String hashtag, String userName){
         UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
                 new SnsException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
-        // post save
-        PostEntity postEntity = postEntityRepository.save(PostEntity.of(title, content, userEntity));
-        // return
-
+        postEntityRepository.save(PostEntity.of(title, content, hashtag, userEntity));
     }
 
 }

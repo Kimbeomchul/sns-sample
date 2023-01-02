@@ -7,7 +7,6 @@ import com.mozzi.sns.exception.ErrorCode;
 import com.mozzi.sns.exception.SnsException;
 import com.mozzi.sns.repository.UserEntityRepository;
 import com.mozzi.sns.util.JwtTokenUtils;
-import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,12 +30,17 @@ public class UserService {
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimes;
 
-
+    /**
+     * 유저체크
+     */
     public User loadUserByUserName(String userName) {
         return userEntityRepository.findByUserName(userName).map(User::fromEntity).orElseThrow(() ->
                 new SnsException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
     }
 
+    /**
+     * 회원가입
+     */
     @Transactional
     public User join(String userName, String password) {
 
@@ -50,6 +54,10 @@ public class UserService {
         return User.fromEntity(userEntity);
     }
 
+
+    /**
+     * 로그인
+     */
     public String login(String userName, String password) {
 
         // 회원가입 체크

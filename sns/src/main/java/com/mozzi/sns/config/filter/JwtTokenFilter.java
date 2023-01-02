@@ -28,6 +28,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private final UserService userService;
     private static final String[] whiteList = {"/api/*/users/join", "/api/*/users/login"};
 
+
+    /**
+     * TODO :: 비로그인시 에러 OR 리다이렉션 처리 OR AuthenticationConfig 공통처리
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 

@@ -28,6 +28,9 @@ public class PostEntity {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "hashtag", columnDefinition = "TEXT")
+    private String hashtag;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
@@ -50,10 +53,11 @@ public class PostEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static PostEntity of(String title, String content, UserEntity userEntity){
+    public static PostEntity of(String title, String content,String hashtag, UserEntity userEntity){
         PostEntity postEntity = new PostEntity();
         postEntity.setTitle(title);
         postEntity.setContent(content);
+        postEntity.setHashtag(hashtag);
         postEntity.setUser(userEntity);
         return postEntity;
     }

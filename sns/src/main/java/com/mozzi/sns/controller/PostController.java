@@ -17,10 +17,13 @@ public class PostController {
 
     private final PostService postService;
 
+    /**
+     * 게시글 쓰기
+     */
     @PostMapping
     public Response<Void> create(@RequestBody PostCreateRequest request, Authentication authentication){
-        postService.create(request.getTitle(), request.getContent(), authentication.getName());
-        return Response.success(null);
+        postService.create(request.getTitle(), request.getContent(), request.getHashtag(), authentication.getName());
+        return Response.success();
     }
 
 }

@@ -15,6 +15,10 @@ public class Response<T> {
         return new Response<>(code, null);
     }
 
+    public static Response<Void> success(){
+        return new Response<>(HttpStatus.OK.getReasonPhrase(), null);
+    }
+
     public static <T> Response<T> success(T data){
         return new Response<>(HttpStatus.OK.getReasonPhrase() , data);
     }

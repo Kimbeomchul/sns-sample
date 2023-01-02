@@ -32,8 +32,17 @@ public class PostService {
     @Transactional
     public void create(String title, String content, String hashtag, String userName){
         UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
-                new SnsException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
+                new SnsException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName))
+        );
         postEntityRepository.save(PostEntity.of(title, content, hashtag, userEntity));
+    }
+    
+    @Transactional
+    public void modify(String title, String content, String userName){
+        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
+                new SnsException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
+
+
     }
 
 }

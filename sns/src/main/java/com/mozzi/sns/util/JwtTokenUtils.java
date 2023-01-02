@@ -4,12 +4,30 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
+@Slf4j
 public class JwtTokenUtils {
+
+    public static String getUserName(String token, String key){
+        return extractClaims(token, key).get("userName", String.class);
+    }
+
+    public static boolean isTokenExpired(String token, String key){
+        Date expiration = extractClaims(token, key).getExpiration();
+        log.info("Expired = {}", expiration);
+        log.info("Expired2 = {}", expiration.before(new Date()));
+        return expiration.before(new Date());
+    }
+
+    private static Claims extractClaims(String token, String key){
+        return Jwts.parserBuilder().setSigningKey(getKey(key))
+                .build().parseClaimsJws(token).getBody();
+    }
 
     public static String generateToken(String userName, String key, long expiredTimeMs){
         Claims claims = Jwts.claims();

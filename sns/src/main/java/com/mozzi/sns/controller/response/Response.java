@@ -18,4 +18,5 @@ public class Response<T> {
     public static <T> Response<T> success(T data){
         return new Response<>(HttpStatus.OK.getReasonPhrase() , data);
     }
+
 }

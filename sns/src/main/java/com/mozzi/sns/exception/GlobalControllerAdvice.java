@@ -21,7 +21,7 @@ public class GlobalControllerAdvice {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> runtimeExceptionHanlder (SnsException e){
+    public ResponseEntity<?> runtimeExceptionHanlder (RuntimeException e){
         log.error("Error = ::: {}", e.toString());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Response.error(ErrorCode.INTERNAL_SERVER_ERROR.name()));
     }

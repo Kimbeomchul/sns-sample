@@ -1,6 +1,5 @@
 package com.mozzi.sns.domain.entity;
 
-import com.mozzi.sns.domain.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -11,32 +10,27 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name ="\"user\"")
+@Table(name = "\"like\"")
 @Getter
 @Setter
-public class UserEntity {
+public class LikeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_name")
-    private String userName;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.USER;
-
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private PostEntity post;
     @Column(name = "registered_at")
     private Timestamp registeredAt;
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    @Column(name = "deleted_at")
-    private Timestamp deletedAt;
 
     @PrePersist
     void registeredAt(){
@@ -48,10 +42,10 @@ public class UserEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static UserEntity of(String userName, String password){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userName);
-        userEntity.setPassword(password);
-        return userEntity;
+    public static LikeEntity of(UserEntity userEntity, PostEntity postEntity){
+        LikeEntity likeEntity = new LikeEntity();
+        likeEntity.setPost(postEntity);
+        likeEntity.setUser(userEntity);
+        return likeEntity;
     }
 }

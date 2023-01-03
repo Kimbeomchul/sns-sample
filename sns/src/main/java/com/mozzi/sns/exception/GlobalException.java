@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SnsException extends RuntimeException{
+public class GlobalException extends RuntimeException{
 
     private ErrorCode errorCode;
     private String message;
 
-    public SnsException(ErrorCode errorCode){
+    public GlobalException(ErrorCode errorCode){
         this.errorCode = errorCode;
         this.message = null;
     }

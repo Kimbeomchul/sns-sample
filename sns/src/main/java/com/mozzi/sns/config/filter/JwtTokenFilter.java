@@ -1,14 +1,12 @@
 package com.mozzi.sns.config.filter;
 
 
-import com.google.common.net.HttpHeaders;
 import com.mozzi.sns.domain.User;
 import com.mozzi.sns.service.UserService;
 import com.mozzi.sns.util.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.PatternMatchUtils;
@@ -31,6 +29,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     /**
      * TODO :: 비로그인시 에러 OR 리다이렉션 처리 OR AuthenticationConfig 공통처리
+     * TODO :: User ROLE에 따른 ADMIN 페이지 접근권한 리다이렉션 추가
      * @param request
      * @param response
      * @param filterChain

@@ -1,21 +1,17 @@
 package com.mozzi.sns.domain.entity;
 
-import com.mozzi.sns.domain.UserRole;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "\"post\"")
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATED \"post\" SET deleted_at = NOW() where id = ?")
-@Where(clause = "deleted_at is NULL")
 public class PostEntity {
 
     @Id
@@ -34,6 +30,9 @@ public class PostEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", orphanRemoval = true)
+    private List<LikeEntity> like;
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;

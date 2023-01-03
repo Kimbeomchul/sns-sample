@@ -5,7 +5,7 @@ import com.mozzi.sns.controller.request.UserJoinRequest;
 import com.mozzi.sns.controller.request.UserLoginRequest;
 import com.mozzi.sns.domain.User;
 import com.mozzi.sns.exception.ErrorCode;
-import com.mozzi.sns.exception.SnsException;
+import com.mozzi.sns.exception.GlobalException;
 import com.mozzi.sns.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class UserControllerTest {
         String userName = "userName";
         String password = "password";
 
-        when(userService.join(userName, password)).thenThrow(new SnsException(ErrorCode.DUPLICATED_USER_NAME, ""));
+        when(userService.join(userName, password)).thenThrow(new GlobalException(ErrorCode.DUPLICATED_USER_NAME, ""));
 
 
         mockMvc.perform(post("/api/v1/users/join")

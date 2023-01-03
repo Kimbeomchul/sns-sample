@@ -5,7 +5,6 @@ import com.mozzi.sns.controller.request.UserLoginRequest;
 import com.mozzi.sns.controller.response.Response;
 import com.mozzi.sns.controller.response.UserJoinResponse;
 import com.mozzi.sns.controller.response.UserLoginResponse;
-import com.mozzi.sns.domain.User;
 import com.mozzi.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +21,12 @@ public class UserController {
 
     @PostMapping("/join")
     public Response<UserJoinResponse> join(@RequestBody UserJoinRequest request){
-        User user = userService.join(request.getUserName(), request.getPassword());
-        return Response.success(UserJoinResponse.fromUser(user));
+        return Response.success(UserJoinResponse.fromUser(userService.join(request.getUserName(), request.getPassword())));
     }
 
     @PostMapping("/login")
     public Response<UserLoginResponse> login(@RequestBody UserLoginRequest request){
-        String token = userService.login(request.getUserName(), request.getPassword());
-        return Response.success(new UserLoginResponse(token));
+        return Response.success(new UserLoginResponse(userService.login(request.getUserName(), request.getPassword())));
     }
 
 }

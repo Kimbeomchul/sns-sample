@@ -1,7 +1,7 @@
 package com.mozzi.sns.config;
 
 import com.mozzi.sns.config.filter.JwtTokenFilter;
-import com.mozzi.sns.exception.CustomAuthenticationEntryPoint;
+import com.mozzi.sns.exception.CustomAuthenticationException;
 import com.mozzi.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/h2-console/**", "^(?!/api/).*");
+        web.ignoring().antMatchers("/h2-console/**");
     }
 
     @Override
@@ -38,10 +38,10 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilterBefore(new JwtTokenFilter(key, userService), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+                .authenticationEntryPoint(new CustomAuthenticationException());
     }
 }

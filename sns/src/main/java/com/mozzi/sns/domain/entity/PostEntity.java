@@ -24,7 +24,7 @@ public class PostEntity {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @Column(name = "hashtag", columnDefinition = "TEXT")
+    @Column(name = "hashtag")
     private String hashtag;
 
     @ManyToOne

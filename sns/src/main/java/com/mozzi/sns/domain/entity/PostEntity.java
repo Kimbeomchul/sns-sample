@@ -9,7 +9,9 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
-@Table(name = "\"post\"")
+@Table(name = "\"post\"", indexes = {
+        @Index(name = "user_id_idx", columnList = "user_id")
+})
 @Getter
 @Setter
 public class PostEntity {

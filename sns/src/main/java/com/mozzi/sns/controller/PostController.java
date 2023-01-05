@@ -1,7 +1,9 @@
 package com.mozzi.sns.controller;
 
+import com.mozzi.sns.controller.request.CommentRequest;
 import com.mozzi.sns.controller.request.PostCreateRequest;
 import com.mozzi.sns.controller.request.PostModifyRequest;
+import com.mozzi.sns.controller.response.CommentResponse;
 import com.mozzi.sns.controller.response.PostResponse;
 import com.mozzi.sns.controller.response.Response;
 import com.mozzi.sns.service.PostService;
@@ -73,4 +75,15 @@ public class PostController {
         return Response.success(postService.likeCount(id));
     }
 
+
+    @PostMapping("/{id}/comments")
+    public Response<Void> createComment(@PathVariable Long id, @RequestBody CommentRequest request, Authentication authentication){
+        postService.createComment(id, request.getComment(), authentication.getName());
+        return Response.success();
+    }
+
+    @GetMapping("/{id}/comments")
+    public Response<Page<CommentResponse>> comment(@PathVariable Long id, Pageable pageable){
+        return Response.success(postService.getComments(id, pageable).map(CommentResponse::fromComment));
+    }
 }

@@ -1,8 +1,11 @@
 package com.mozzi.sns.service;
 
 
+import com.mozzi.sns.domain.Comment;
 import com.mozzi.sns.domain.Post;
+import com.mozzi.sns.domain.entity.CommentEntity;
 import com.mozzi.sns.domain.entity.LikeEntity;
+import com.mozzi.sns.repository.CommentEntityRepository;
 import com.mozzi.sns.repository.LikeEntityRepository;
 import com.mozzi.sns.domain.entity.PostEntity;
 import com.mozzi.sns.domain.entity.UserEntity;
@@ -28,6 +31,7 @@ public class PostService {
     private final PostEntityRepository postEntityRepository;
     private final UserEntityRepository userEntityRepository;
     private final LikeEntityRepository likeEntityRepository;
+    private final CommentEntityRepository commentEntityRepository;
 
 
     /**
@@ -40,21 +44,15 @@ public class PostService {
      */
     @Transactional
     public void create(String title, String content, String hashtag, String userName){
-        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
-                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName))
-        );
-        postEntityRepository.save(PostEntity.of(title, content, hashtag, userEntity));
+        postEntityRepository.save(PostEntity.of(title, content, hashtag, getUserEntity(userName)));
     }
     
     @Transactional
     public void modify(String title, String content, String hashtag, String userName, Long id){
-        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
-                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
+        UserEntity userEntity = getUserEntity(userName);
+        PostEntity postEntity = getPostEntity(id);
 
-        PostEntity postEntity = postEntityRepository.findById(id).orElseThrow(() ->
-                new GlobalException(ErrorCode.POST_NOT_FOUND, String.format("%s not found", id)));
-
-        if(postEntity.getUser() != userEntity) {
+        if(postEntity.getUser() != getUserEntity(userName)) {
             throw new GlobalException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission", userEntity));
         }
 
@@ -66,11 +64,8 @@ public class PostService {
 
     @Transactional
     public void delete(String userName, Long id){
-        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
-                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
-
-        PostEntity postEntity = postEntityRepository.findById(id).orElseThrow(() ->
-                new GlobalException(ErrorCode.POST_NOT_FOUND, String.format("%s not found", id)));
+        UserEntity userEntity = getUserEntity(userName);
+        PostEntity postEntity = getPostEntity(id);
 
         if(postEntity.getUser() != userEntity) {
             throw new GlobalException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission", userEntity));
@@ -86,19 +81,14 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public Page<Post> myPost(String userName, Pageable pageable){
-        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
-                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
-        return postEntityRepository.findAllByUser(userEntity, pageable).map(Post::fromEntity);
+        return postEntityRepository.findAllByUser(getUserEntity(userName), pageable).map(Post::fromEntity);
     }
 
 
     @Transactional
     public void like(String userName, Long id){
-        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
-                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
-
-        PostEntity postEntity = postEntityRepository.findById(id).orElseThrow(() ->
-                new GlobalException(ErrorCode.POST_NOT_FOUND, String.format("%s not found", id)));
+        UserEntity userEntity = getUserEntity(userName);
+        PostEntity postEntity = getPostEntity(id);
 
         // 좋아요 누른사람인지 체크
         Optional<LikeEntity> byUserAndPost = likeEntityRepository.findByUserAndPost(userEntity, postEntity);
@@ -111,9 +101,26 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public Integer likeCount(Long id){
-        PostEntity postEntity = postEntityRepository.findById(id).orElseThrow(() ->
-                new GlobalException(ErrorCode.POST_NOT_FOUND, String.format("%s post not found", id)));
+        return likeEntityRepository.countByPost(getPostEntity(id));
+    }
 
-        return likeEntityRepository.countByPost(postEntity);
+    @Transactional
+    public void createComment(Long id, String comment, String userName){
+        commentEntityRepository.save(CommentEntity.of(getUserEntity(userName), getPostEntity(id), comment));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Comment> getComments(Long id, Pageable pageable){
+        return commentEntityRepository.findAllByPost(getPostEntity(id), pageable).map(Comment::fromEntity);
+    }
+
+    private PostEntity getPostEntity(Long id){
+        return postEntityRepository.findById(id).orElseThrow(() ->
+                new GlobalException(ErrorCode.POST_NOT_FOUND, String.format("%s post not found", id)));
+    }
+
+    private UserEntity getUserEntity(String userName){
+        return userEntityRepository.findByUserName(userName).orElseThrow(() ->
+                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not found", userName)));
     }
 }

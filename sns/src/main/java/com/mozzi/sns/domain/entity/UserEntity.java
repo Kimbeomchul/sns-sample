@@ -11,7 +11,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name ="\"user\"")
+@Table(name ="\"user\"", indexes = {
+        @Index(name = "user_name_idx", columnList = "user_name")
+})
 @Getter
 @Setter
 public class UserEntity {

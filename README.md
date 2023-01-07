@@ -12,3 +12,8 @@
 - 데이터 크롤링처리
 - 추천알고리즘 
  - etc
+
+
+## chat SSE 프로토콜 추가
+- 테스트 완료
+- front end 참고 바람 https://github.com/rkdwlss2/chat_app_front

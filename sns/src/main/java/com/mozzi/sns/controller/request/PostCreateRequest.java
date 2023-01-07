@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PostCreateRequest {
-
     private String title;
     private String content;
     private String hashtag;

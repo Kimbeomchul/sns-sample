@@ -9,7 +9,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "\"comment\"", indexes = {
-        @Index(name = "post_id_idx", columnList = "post_id")
+        @Index(name = "comment_post_id_idx", columnList = "post_id")
 })
 @Getter
 @Setter

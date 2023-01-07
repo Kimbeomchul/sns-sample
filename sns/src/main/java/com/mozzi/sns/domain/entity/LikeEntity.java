@@ -11,8 +11,8 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "\"like\"", indexes = {
-        @Index(name = "user_id_idx", columnList = "user_id"),
-        @Index(name = "post_id_idx", columnList = "post_id")
+        @Index(name = "like_user_id_idx", columnList = "user_id"),
+        @Index(name = "like_post_id_idx", columnList = "post_id")
 })
 @Getter
 @Setter

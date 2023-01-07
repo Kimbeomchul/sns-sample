@@ -1,6 +1,5 @@
 package com.mozzi.sns.exception;
 
-import com.mozzi.sns.controller.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

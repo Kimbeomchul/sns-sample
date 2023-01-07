@@ -1,7 +1,6 @@
 package com.mozzi.sns.domain;
 
 import com.mozzi.sns.domain.entity.CommentEntity;
-import com.mozzi.sns.domain.entity.PostEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

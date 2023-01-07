@@ -20,7 +20,7 @@ public class GlobalControllerAdvice {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> runtimeExceptionHanlder (RuntimeException e){
+    public ResponseEntity<?> runtimeExceptionHandler (RuntimeException e){
         log.error("Error = ::: {}", e.toString());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Response.error(ErrorCode.INTERNAL_SERVER_ERROR.name()));
     }

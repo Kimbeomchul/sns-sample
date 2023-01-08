@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private UserRole role;
     private Timestamp registeredAt;
     private Timestamp updatedAt;
-    private Timestamp deletedAt;
+    private String deletedYn;
 
 
     public static User fromEntity(UserEntity entity){
@@ -38,7 +38,7 @@ public class User implements UserDetails {
                 entity.getRole(),
                 entity.getRegisteredAt(),
                 entity.getUpdatedAt(),
-                entity.getDeletedAt()
+                entity.getDeletedYn()
         );
     }
 
@@ -54,21 +54,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.deletedAt == null;
+        return "N".equals(this.deletedYn);
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.deletedAt == null;
+        return "N".equals(this.deletedYn);
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.deletedAt == null;
+        return "N".equals(this.deletedYn);
     }
 
     @Override
     public boolean isEnabled() {
-        return this.deletedAt == null;
+        return "N".equals(this.deletedYn);
     }
 }

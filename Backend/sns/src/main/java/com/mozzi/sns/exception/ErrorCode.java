@@ -4,6 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * packageName : com.mozzi.sns.exception
+ * fileName : ErrorCode
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
@@ -14,7 +26,9 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR ,"Internal Server Error"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "Invalid token"),
     POST_NOT_FOUND(HttpStatus.NOT_FOUND, "Post not found"),
-    INVALID_PERMISSION(HttpStatus.UNAUTHORIZED, "Permission invalid");
+    INVALID_PERMISSION(HttpStatus.UNAUTHORIZED, "Permission invalid"),
+
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "Comment not found");
 
     private HttpStatus status;
     private String message;

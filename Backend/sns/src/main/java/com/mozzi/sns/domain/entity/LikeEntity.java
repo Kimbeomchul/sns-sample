@@ -2,12 +2,24 @@ package com.mozzi.sns.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
+
+/**
+ * packageName : com.mozzi.sns.domain.entity
+ * fileName : LikeEntity
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
 
 @Entity
 @Table(name = "\"like\"", indexes = {
@@ -15,17 +27,18 @@ import java.time.Instant;
         @Index(name = "like_post_id_idx", columnList = "post_id")
 })
 @Getter
-@Setter
 public class LikeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne @Setter
+    @Where(clause = "deleted_yn = 'N'")
     @JoinColumn(name = "user_id")
     private UserEntity user;
-    @ManyToOne
+    @ManyToOne @Setter
+    @Where(clause = "deleted_yn = 'N'")
     @JoinColumn(name = "post_id")
     private PostEntity post;
     @Column(name = "registered_at")

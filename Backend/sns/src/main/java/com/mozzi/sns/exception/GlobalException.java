@@ -3,6 +3,18 @@ package com.mozzi.sns.exception;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * packageName : com.mozzi.sns.exception
+ * fileName : GlobalException
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
 @Getter
 @AllArgsConstructor
 public class GlobalException extends RuntimeException{

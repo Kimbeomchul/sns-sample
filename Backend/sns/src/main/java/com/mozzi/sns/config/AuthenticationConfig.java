@@ -13,6 +13,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * packageName : com.mozzi.sns.config
+ * fileName : AuthenticationConfig
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor

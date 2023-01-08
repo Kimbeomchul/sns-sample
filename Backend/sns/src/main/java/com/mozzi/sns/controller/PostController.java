@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class PostController {
      * 게시글 쓰기
      */
     @PostMapping
-    public Response<Void> create(@RequestBody PostCreateRequest request, Authentication authentication){
+    public Response<Void> create(@Valid @RequestBody PostCreateRequest request, Authentication authentication){
         postService.create(request.getTitle(), request.getContent(), request.getHashtag(), authentication.getName());
         return Response.success();
     }
@@ -64,26 +66,46 @@ public class PostController {
         return Response.success();
     }
 
+    /**
+     * 게시글 좋아요 추가 및 삭제
+     */
     @PostMapping("/{id}/likes")
     public Response<Void> like(@PathVariable Long id, Authentication authentication){
         postService.like(authentication.getName(), id);
         return Response.success();
     }
 
+    /**
+     * 게시글 좋아요 조회
+     */
     @GetMapping("/{id}/likes")
     public Response<Integer> likeCount(@PathVariable Long id){
         return Response.success(postService.likeCount(id));
     }
 
-
+    /**
+     * 게시글 댓글 추가
+     */
     @PostMapping("/{id}/comments")
-    public Response<Void> createComment(@PathVariable Long id, @RequestBody CommentRequest request, Authentication authentication){
+    public Response<Void> createComment(@PathVariable Long id, @Valid @RequestBody CommentRequest request, Authentication authentication){
         postService.createComment(id, request.getComment(), authentication.getName());
         return Response.success();
     }
 
+    /**
+     * 게시글 댓글 조회
+     */
     @GetMapping("/{id}/comments")
     public Response<Page<CommentResponse>> comment(@PathVariable Long id, Pageable pageable){
         return Response.success(postService.getComments(id, pageable).map(CommentResponse::fromComment));
+    }
+
+    /**
+     * 게시글 댓글 삭제
+     */
+    @DeleteMapping("/{id}/comments/{commentId}")
+    public Response<Void> deleteComment(@PathVariable Long id,@PathVariable Long commentId, Authentication authentication){
+        postService.deleteComment(id, commentId, authentication.getName());
+        return Response.success();
     }
 }

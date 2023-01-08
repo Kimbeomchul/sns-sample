@@ -10,6 +10,19 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * packageName : com.mozzi.sns.util
+ * fileName : JwtTokenUtils
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
+
 @Slf4j
 public class JwtTokenUtils {
 

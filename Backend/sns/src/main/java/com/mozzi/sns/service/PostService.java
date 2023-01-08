@@ -22,6 +22,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+
+/**
+ * packageName : com.mozzi.sns.service
+ * fileName : PostService
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -69,8 +82,7 @@ public class PostService {
         if(postEntity.getUser() != userEntity) {
             throw new GlobalException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission", userEntity));
         }
-
-        postEntityRepository.delete(postEntity);
+        postEntityRepository.deleteById(postEntity.getId());
     }
 
     @Transactional(readOnly = true)
@@ -112,6 +124,22 @@ public class PostService {
     public Page<Comment> getComments(Long id, Pageable pageable){
         return commentEntityRepository.findAllByPost(getPostEntity(id), pageable).map(Comment::fromEntity);
     }
+
+    @Transactional
+    public void deleteComment(Long id, Long commentId, String userName){
+        // 게시글 확인
+        getPostEntity(id);
+        // 댓글조회
+        CommentEntity commentEntity = commentEntityRepository.findById(commentId).orElseThrow(() ->
+                new GlobalException(ErrorCode.COMMENT_NOT_FOUND, String.format("%s comment not found", id)));
+        // 유저정보가 다를시
+        if(!commentEntity.getUser().getUserName().equals(userName)){
+            throw new GlobalException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission at comment %s", userName, commentEntity.getId()));
+        }
+        commentEntityRepository.delete(commentEntity);
+    }
+
+
 
     private PostEntity getPostEntity(Long id){
         return postEntityRepository.findById(id).orElseThrow(() ->

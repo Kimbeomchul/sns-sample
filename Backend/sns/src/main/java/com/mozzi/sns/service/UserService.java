@@ -15,6 +15,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+/**
+ * packageName : com.mozzi.sns.service
+ * fileName : UserService
+ * author : kimbeomchul
+ * date : 2023/01/08
+ * description :
+ * ===========================================================
+ * DATE    AUTHOR    NOTE
+ * -----------------------------------------------------------
+ * 2023/01/08 kimbeomchul 최초 생성
+ */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -58,6 +71,7 @@ public class UserService {
     }
 
     // 로그인
+    @Transactional(readOnly = true)
     public String login(String userName, String password) {
 
         // 회원가입 체크
@@ -69,5 +83,12 @@ public class UserService {
         }
         // 토큰생성
         return JwtTokenUtils.generateToken(userName, secretKey, expiredTimes);
+    }
+
+    // 회원탈퇴
+    @Transactional
+    public void withdrawal(String userName){
+        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() -> new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
+        userEntityRepository.deleteById(userEntity.getId());
     }
 }

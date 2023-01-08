@@ -2,6 +2,7 @@ package com.mozzi.sns.service;
 
 
 import com.mozzi.sns.domain.Post;
+import com.mozzi.sns.domain.Question;
 import com.mozzi.sns.domain.entity.*;
 import com.mozzi.sns.exception.ErrorCode;
 import com.mozzi.sns.exception.GlobalException;
@@ -47,19 +48,17 @@ public class QuestionService {
     @Transactional
     public void delete(Long id){
         QuestionEntity questionEntity = getQuestionEntity(id);
-
-
         questionEntityRepository.delete(questionEntity);
     }
 
     @Transactional(readOnly = true)
-    public Page<Post> postList(Pageable pageable){
-        return postEntityRepository.findAll(pageable).map(Post::fromEntity);
+    public Page<Question> postList(Pageable pageable){
+        return questionEntityRepository.findAll(pageable).map(Question::fromEntity);
     }
 
     private QuestionEntity getQuestionEntity(Long id){
         return questionEntityRepository.findById(id).orElseThrow(() ->
-                new GlobalException(ErrorCode.POST_NOT_FOUND, String.format("%s post not found", id)));
+                new GlobalException(ErrorCode.QUESTION_NOT_FOUND, String.format("%s question not found", id)));
     }
 
 

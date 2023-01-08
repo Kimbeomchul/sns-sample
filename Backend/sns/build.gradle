@@ -58,8 +58,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb-reactive
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive'
 
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
 }
 
 tasks.named('test') {

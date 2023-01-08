@@ -52,6 +52,14 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+
+	// chat 전용 mongodb reactive, webflux 추가
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb-reactive
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webflux
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
 }
 
 tasks.named('test') {

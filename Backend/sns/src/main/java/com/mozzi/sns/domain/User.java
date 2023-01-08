@@ -18,6 +18,9 @@ public class User implements UserDetails {
     private Long id;
     private String userName;
     private String password;
+    private String nickname;
+    private String userImage;
+    private UserLive livingAt;
     private UserRole role;
     private Timestamp registeredAt;
     private Timestamp updatedAt;
@@ -29,6 +32,9 @@ public class User implements UserDetails {
                 entity.getId(),
                 entity.getUserName(),
                 entity.getPassword(),
+                entity.getNickname(),
+                entity.getUserImage(),
+                entity.getLivingAt(),
                 entity.getRole(),
                 entity.getRegisteredAt(),
                 entity.getUpdatedAt(),

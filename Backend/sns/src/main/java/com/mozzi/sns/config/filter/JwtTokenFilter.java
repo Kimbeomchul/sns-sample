@@ -41,16 +41,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         // whiteList 체크
         final String requestURI = request.getRequestURI();
-        if(!whiteListMatcher(requestURI)){
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         // 토큰 존재여부 체크
         final String header = request.getHeader("authorization");
 
-        if(header == null || !header.startsWith("Bearer ")){
-            log.error("Error occurs while getting user info from token");
+        if(!whiteListMatcher(requestURI)){
+            if(header == null || !header.startsWith("Bearer ")){
+                log.error("Error occurs while getting user info from token");
+            }
             filterChain.doFilter(request, response);
             return;
         }

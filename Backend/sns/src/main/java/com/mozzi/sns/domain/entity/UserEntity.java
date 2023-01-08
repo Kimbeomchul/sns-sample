@@ -1,5 +1,6 @@
 package com.mozzi.sns.domain.entity;
 
+import com.mozzi.sns.domain.UserLive;
 import com.mozzi.sns.domain.UserRole;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,14 +24,24 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "user_name")
-    private String userName;
+    private String userName; // 회원아이디
 
     @Column(name = "password")
-    private String password;
+    private String password; // 비밀번호
+
+    @Column(name = "nickname")
+    private String nickname; // 닉네임
+
+    @Column(name = "user_image")
+    private String userImage; // 유저이미지
+
+    @Column(name = "living_at")
+    @Enumerated(EnumType.STRING)
+    private UserLive livingAt = UserLive.None; // 사는곳
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.USER;
+    private UserRole role = UserRole.USER; // 유저 권한
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;
@@ -50,10 +61,16 @@ public class UserEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static UserEntity of(String userName, String password){
+    public static UserEntity of(String userName, String password, String nickname, String userImage){
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userName);
         userEntity.setPassword(password);
+        userEntity.setNickname(nickname);
+        if(userImage == null){
+            userEntity.setUserImage("defaultURL");
+        }else{
+            userEntity.setUserImage(userImage);
+        }
         return userEntity;
     }
 }

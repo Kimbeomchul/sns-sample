@@ -6,6 +6,7 @@ import com.mozzi.sns.domain.entity.UserEntity;
 import com.mozzi.sns.exception.ErrorCode;
 import com.mozzi.sns.exception.GlobalException;
 import com.mozzi.sns.repository.UserEntityRepository;
+import com.mozzi.sns.util.CommonUtils;
 import com.mozzi.sns.util.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,17 +39,23 @@ public class UserService {
     // 회원가입
     @Transactional
     public User join(String userName, String password) {
-
         // 회원가입 체크
         userEntityRepository.findByUserName(userName).ifPresent(it -> {
             throw new GlobalException(ErrorCode.DUPLICATED_USER_NAME, String.format("%s is duplicated", userName));
         });
 
         // 회원가입 진행
-        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName, bCryptPasswordEncoder.encode(password)));
+        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName, bCryptPasswordEncoder.encode(password), CommonUtils.randomNickname(), null));
         return User.fromEntity(userEntity);
     }
 
+
+    // 유저조회
+    @Transactional(readOnly = true)
+    public User user(String userName) {
+        return User.fromEntity(userEntityRepository.findByUserName(userName).orElseThrow(() ->
+                new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName))));
+    }
 
     // 로그인
     public String login(String userName, String password) {

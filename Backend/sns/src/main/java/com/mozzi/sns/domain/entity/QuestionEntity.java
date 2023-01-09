@@ -8,33 +8,32 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name = "\"comment\"", indexes = {
-        @Index(name = "post_id_idx", columnList = "post_id")
-})
+@Table(name = "\"question\"")
 @Getter
-@Setter
 public class QuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(name = "email")
     private String email;
 
+    @Setter
     @Column(name = "type")
     private String type;
 
+    @Setter
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "delete_yn")
-    private String deleteYn;
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+
 
     @PrePersist
     void registeredAt(){

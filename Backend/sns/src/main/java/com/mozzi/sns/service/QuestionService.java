@@ -21,14 +21,6 @@ public class QuestionService {
 
     private final QuestionEntityRepository questionEntityRepository;
 
-
-    /**
-     * TODO :: 해시태그 "#" 처리
-     * TODO :: 게시글 처리
-     * @param email
-     * @param content
-     * @param type
-     */
     @Transactional
     public void create(String email, String type, String content){
         questionEntityRepository.save(QuestionEntity.of(email, type, content));
@@ -52,7 +44,7 @@ public class QuestionService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Question> postList(Pageable pageable){
+    public Page<Question> questionList(Pageable pageable){
         return questionEntityRepository.findAll(pageable).map(Question::fromEntity);
     }
 

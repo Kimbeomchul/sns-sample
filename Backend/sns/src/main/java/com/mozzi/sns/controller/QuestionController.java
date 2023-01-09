@@ -24,11 +24,10 @@ public class QuestionController {
 
     /**
      * 질문글 전체 리스트 조회
-     *
      */
     @GetMapping
-    public Response<Page<QuestionResponse>> postList(Pageable pageable){
-        return Response.success(questionService.postList(pageable).map(QuestionResponse::fromPost));
+    public Response<Page<QuestionResponse>> questionList(Pageable pageable){
+        return Response.success(questionService.questionList(pageable).map(QuestionResponse::fromPost));
     }
 
 

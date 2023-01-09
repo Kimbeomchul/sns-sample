@@ -26,6 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// MYSQL
+	implementation 'mysql:mysql-connector-java'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

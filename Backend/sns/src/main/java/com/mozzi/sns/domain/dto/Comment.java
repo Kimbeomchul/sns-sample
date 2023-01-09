@@ -1,4 +1,4 @@
-package com.mozzi.sns.domain;
+package com.mozzi.sns.domain.dto;
 
 import com.mozzi.sns.domain.entity.CommentEntity;
 import lombok.AllArgsConstructor;

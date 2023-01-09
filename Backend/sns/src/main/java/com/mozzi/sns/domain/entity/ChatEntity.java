@@ -1,4 +1,4 @@
-package com.mozzi.sns.domain;
+package com.mozzi.sns.domain.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Document(collection = "chat")
-public class Chat {
+public class ChatEntity {
 
     @Id
     private String id;

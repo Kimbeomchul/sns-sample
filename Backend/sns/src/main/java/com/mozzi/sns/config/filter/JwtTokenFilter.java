@@ -1,7 +1,7 @@
 package com.mozzi.sns.config.filter;
 
 
-import com.mozzi.sns.domain.User;
+import com.mozzi.sns.domain.dto.User;
 import com.mozzi.sns.service.UserService;
 import com.mozzi.sns.util.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;

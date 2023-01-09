@@ -1,6 +1,5 @@
-package com.mozzi.sns.domain;
+package com.mozzi.sns.domain.dto;
 
-import com.mozzi.sns.domain.entity.PostEntity;
 import com.mozzi.sns.domain.entity.QuestionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

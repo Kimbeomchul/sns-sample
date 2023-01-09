@@ -1,7 +1,7 @@
 package com.mozzi.sns.service;
 
 
-import com.mozzi.sns.domain.User;
+import com.mozzi.sns.domain.dto.User;
 import com.mozzi.sns.domain.entity.UserEntity;
 import com.mozzi.sns.exception.ErrorCode;
 import com.mozzi.sns.exception.GlobalException;

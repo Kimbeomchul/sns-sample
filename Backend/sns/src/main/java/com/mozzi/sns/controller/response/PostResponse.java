@@ -1,6 +1,6 @@
 package com.mozzi.sns.controller.response;
 
-import com.mozzi.sns.domain.Post;
+import com.mozzi.sns.domain.dto.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

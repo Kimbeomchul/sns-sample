@@ -26,6 +26,7 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR ,"Internal Server Error"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "Invalid token"),
     POST_NOT_FOUND(HttpStatus.NOT_FOUND, "Post not found"),
+    QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND, "Question not found"),
     INVALID_PERMISSION(HttpStatus.UNAUTHORIZED, "Permission invalid"),
 
     COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "Comment not found");

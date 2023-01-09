@@ -1,9 +1,6 @@
 package com.mozzi.sns.controller;
 
-import com.mozzi.sns.controller.request.CommentRequest;
-import com.mozzi.sns.controller.request.PostCreateRequest;
-import com.mozzi.sns.controller.request.PostModifyRequest;
-import com.mozzi.sns.controller.request.QuestionCreateRequest;
+import com.mozzi.sns.controller.request.*;
 import com.mozzi.sns.controller.response.CommentResponse;
 import com.mozzi.sns.controller.response.PostResponse;
 import com.mozzi.sns.controller.response.QuestionResponse;
@@ -15,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/questions")
@@ -29,7 +28,7 @@ public class QuestionController {
      */
     @GetMapping
     public Response<Page<QuestionResponse>> postList(Pageable pageable){
-        return Response.success(postService.postList(pageable).map(QuestionResponse::fromPost));
+        return Response.success(questionService.postList(pageable).map(QuestionResponse::fromPost));
     }
 
 
@@ -37,7 +36,7 @@ public class QuestionController {
      * 질문글 쓰기
      */
     @PostMapping
-    public Response<Void> create(@RequestBody QuestionCreateRequest request, Authentication authentication){
+    public Response<Void> create(@Valid @RequestBody QuestionCreateRequest request, Authentication authentication){
         questionService.create(request.getEmail(), request.getType(), request.getContent());
         return Response.success();
     }
@@ -46,8 +45,8 @@ public class QuestionController {
      * 질문글 수정
      */
     @PutMapping("/{id}")
-    public Response<Void> modify(@PathVariable Long id, @RequestBody PostModifyRequest request, Authentication authentication){
-        postService.modify(request.getTitle(), request.getContent(), request.getHashtag(), authentication.getName(), id);
+    public Response<Void> modify(@PathVariable Long id,@Valid @RequestBody QuestionModifyRequest request, Authentication authentication){
+        questionService.modify(request.getEmail(), request.getType(), request.getContent(), id);
         return Response.success();
     }
 
@@ -56,7 +55,7 @@ public class QuestionController {
      */
     @DeleteMapping("/{id}")
     public Response<Void> delete(@PathVariable Long id, Authentication authentication){
-        postService.delete(authentication.getName(), id);
+        questionService.delete(id);
         return Response.success();
     }
 

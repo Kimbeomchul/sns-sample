@@ -4,7 +4,6 @@ import com.mozzi.sns.domain.UserLive;
 import com.mozzi.sns.domain.UserRole;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -48,9 +47,8 @@ public class UserEntity {
     @Column(name = "nickname") @Setter
     private String nickname; // 닉네임
 
-    @ColumnDefault("defaultURL")
     @Column(name = "user_image") @Setter
-    private String userImage = "defaultURL"; // 유저이미지
+    private String userImage; // 유저이미지
 
     @Column(name = "living_at")
     @Enumerated(EnumType.STRING)

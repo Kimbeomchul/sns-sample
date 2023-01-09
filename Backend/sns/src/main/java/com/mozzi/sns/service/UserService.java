@@ -56,9 +56,8 @@ public class UserService {
         userEntityRepository.findByUserName(userName).ifPresent(it -> {
             throw new GlobalException(ErrorCode.DUPLICATED_USER_NAME, String.format("%s is duplicated", userName));
         });
-
         // 회원가입 진행
-        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName, bCryptPasswordEncoder.encode(password), CommonUtils.randomNickname(), null));
+        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName, bCryptPasswordEncoder.encode(password), CommonUtils.randomNickname(), "default"));
         return User.fromEntity(userEntity);
     }
 

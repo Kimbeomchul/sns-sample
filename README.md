@@ -6,7 +6,7 @@
  - FE : React, Flutter(껍데기? 기기UUID 제공? 고민중)
  - DB : Postgre sql, Redis..
  - Cloud : EC2, RDS, S3
- - ETC : Jenkins
+ - CI/CD : Jenkins
 
 ## 팀 
  - 김범철 : BE / Flutter

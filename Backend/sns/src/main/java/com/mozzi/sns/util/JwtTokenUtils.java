@@ -1,5 +1,7 @@
 package com.mozzi.sns.util;
 
+import com.mozzi.sns.domain.UserLive;
+import com.mozzi.sns.domain.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -8,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -51,11 +54,15 @@ public class JwtTokenUtils {
 
     /**
      * JWT 토큰생성
-     * TODO : 현재 토큰 내 회원아이디만 존재 추후 필요시 변경
      */
-    public static String generateToken(String userName, String key, long expiredTimeMs){
+    public static String generateToken(String userName, String nickName, String userImage, UserLive userLive,  UserRole userRole, Timestamp registeredAt, String key, long expiredTimeMs){
         Claims claims = Jwts.claims();
         claims.put("userName", userName);
+        claims.put("nickName", nickName);
+        claims.put("userImage", userImage);
+        claims.put("userLive", userLive);
+        claims.put("userRole", userRole);
+        claims.put("registeredAt", registeredAt);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))

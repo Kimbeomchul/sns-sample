@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -32,13 +34,13 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/join")
-    public Response<UserJoinResponse> join(@RequestBody UserJoinRequest request){
+    public Response<UserJoinResponse> join(@Valid @RequestBody UserJoinRequest request){
         return Response.success(UserJoinResponse.fromUser(userService.join(request.getUserName(), request.getPassword())));
     }
 
     // 로그인
     @PostMapping("/login")
-    public Response<UserLoginResponse> login(@RequestBody UserLoginRequest request){
+    public Response<UserLoginResponse> login(@Valid @RequestBody UserLoginRequest request){
         return Response.success(new UserLoginResponse(userService.login(request.getUserName(), request.getPassword())));
     }
 

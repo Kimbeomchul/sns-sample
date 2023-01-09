@@ -81,7 +81,7 @@ public class UserService {
             throw new GlobalException(ErrorCode.INVALID_PASSWORD);
         }
         // 토큰생성
-        return JwtTokenUtils.generateToken(userName, secretKey, expiredTimes);
+        return JwtTokenUtils.generateToken(userName, userEntity.getNickname(), userEntity.getUserImage(),userEntity.getLivingAt(), userEntity.getRole(), userEntity.getRegisteredAt(), secretKey, expiredTimes);
     }
 
     // 회원탈퇴

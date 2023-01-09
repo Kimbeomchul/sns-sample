@@ -4,7 +4,7 @@
 ## 사용기술
  - BE : Springboot / java 11
  - FE : React, Flutter(껍데기? 기기UUID 제공? 고민중)
- - DB : Postgre sql, Redis..
+ - DB : MYSQL, Redis..
  - Cloud : EC2, RDS, S3
  - CI/CD : Jenkins
 
@@ -14,7 +14,7 @@
  - 전주환 : FE
 
 ## TODO
-- EC2 생성 (강명진)
+- EC2 ,DB(MYSQL) 생성 (강명진)
 - Redis 캐싱 및 동시성 (김범철) 
 - 대댓글기능 (김범철)
 - 지도기능 (전주환)

@@ -1,8 +1,8 @@
 package com.mozzi.sns.service;
 
 
-import com.mozzi.sns.domain.Comment;
-import com.mozzi.sns.domain.Post;
+import com.mozzi.sns.domain.dto.Comment;
+import com.mozzi.sns.domain.dto.Post;
 import com.mozzi.sns.domain.entity.CommentEntity;
 import com.mozzi.sns.domain.entity.LikeEntity;
 import com.mozzi.sns.repository.CommentEntityRepository;

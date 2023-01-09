@@ -1,8 +1,7 @@
 package com.mozzi.sns.service;
 
 
-import com.mozzi.sns.domain.Post;
-import com.mozzi.sns.domain.Question;
+import com.mozzi.sns.domain.dto.Question;
 import com.mozzi.sns.domain.entity.*;
 import com.mozzi.sns.exception.ErrorCode;
 import com.mozzi.sns.exception.GlobalException;

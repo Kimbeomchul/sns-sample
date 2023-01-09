@@ -1,5 +1,7 @@
-package com.mozzi.sns.domain;
+package com.mozzi.sns.domain.dto;
 
+import com.mozzi.sns.domain.UserLive;
+import com.mozzi.sns.domain.UserRole;
 import com.mozzi.sns.domain.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

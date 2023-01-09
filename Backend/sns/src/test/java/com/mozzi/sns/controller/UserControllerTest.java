@@ -3,7 +3,7 @@ package com.mozzi.sns.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mozzi.sns.controller.request.UserJoinRequest;
 import com.mozzi.sns.controller.request.UserLoginRequest;
-import com.mozzi.sns.domain.User;
+import com.mozzi.sns.domain.dto.User;
 import com.mozzi.sns.exception.ErrorCode;
 import com.mozzi.sns.exception.GlobalException;
 import com.mozzi.sns.service.UserService;

@@ -18,6 +18,8 @@ public class Place {
 
     private String placePhone; // 상점전화번호
 
+    private String placeAddress; // 상점주소
+
     private PlaceType placeType; // 상점 종류
 
     private String openInfo; // 오픈/마감 시간
@@ -38,6 +40,7 @@ public class Place {
                 entity.getId(),
                 entity.getPlaceName(),
                 entity.getPlacePhone(),
+                entity.getPlaceAddress(),
                 entity.getPlaceType(),
                 entity.getOpenInfo(),
                 entity.getLatitude(),

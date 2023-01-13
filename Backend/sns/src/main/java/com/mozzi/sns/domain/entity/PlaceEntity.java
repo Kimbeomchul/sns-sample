@@ -42,6 +42,10 @@ public class PlaceEntity {
     private String placePhone; // 상점전화번호
 
     @Setter
+    @Column(name = "address")
+    private String placeAddress; // 상점주소
+
+    @Setter
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private PlaceType placeType; // 상점 종류
@@ -82,10 +86,11 @@ public class PlaceEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static PlaceEntity of(String placeName, String placePhone, PlaceType placeType, String openInfo, String latitude, String longitude,String detail){
+    public static PlaceEntity of(String placeName, String placePhone, PlaceType placeType, String openInfo, String latitude, String longitude,String detail, String placeAddress){
         PlaceEntity placeEntity = new PlaceEntity();
         placeEntity.setPlaceName(placeName);
         placeEntity.setPlacePhone(placePhone);
+        placeEntity.setPlaceAddress(placeAddress);
         placeEntity.setPlaceType(placeType);
         placeEntity.setOpenInfo(openInfo);
         placeEntity.setLatitude(latitude);

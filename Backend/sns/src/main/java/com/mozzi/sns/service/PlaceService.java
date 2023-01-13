@@ -39,7 +39,7 @@ public class PlaceService {
      */
     @Transactional
     public void create(String placeName, String placePhone, PlaceType placeType, String openInfo, String latitude, String longitude, String detail){
-        placeEntityRepository.save(PlaceEntity.of(placeName, placePhone, placeType, openInfo,latitude,longitude,detail));
+        placeEntityRepository.save(PlaceEntity.of(placeName, placePhone, placeType, openInfo,latitude,longitude,detail,""));
     }
 
     @Transactional(readOnly = true)

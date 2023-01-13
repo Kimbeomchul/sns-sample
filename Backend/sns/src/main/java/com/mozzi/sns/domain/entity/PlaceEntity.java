@@ -58,6 +58,11 @@ public class PlaceEntity {
     @Column(name = "longitude")
     private String longitude; // 경도
 
+    @Setter
+    @Column(name = "detail")
+    private String detail; // 상세 설명
+
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", orphanRemoval = true)
     private List<PlaceLikeEntity> placeLikes;
 
@@ -77,7 +82,7 @@ public class PlaceEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static PlaceEntity of(String placeName, String placePhone, PlaceType placeType, String openInfo, String latitude, String longitude){
+    public static PlaceEntity of(String placeName, String placePhone, PlaceType placeType, String openInfo, String latitude, String longitude,String detail){
         PlaceEntity placeEntity = new PlaceEntity();
         placeEntity.setPlaceName(placeName);
         placeEntity.setPlacePhone(placePhone);
@@ -85,6 +90,7 @@ public class PlaceEntity {
         placeEntity.setOpenInfo(openInfo);
         placeEntity.setLatitude(latitude);
         placeEntity.setLongitude(longitude);
+        placeEntity.setDetail(detail);
         return placeEntity;
     }
 }

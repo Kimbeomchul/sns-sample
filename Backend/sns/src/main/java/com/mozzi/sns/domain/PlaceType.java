@@ -8,6 +8,8 @@ public enum PlaceType {
     STORE,
     BANK,
     HAIR_SHOP,
-    PARKING_LOT
+    PARKING_LOT,
+    PUBLIC_INSTITUTIONS,
+    CONVENIENCE_STORE
 
 }

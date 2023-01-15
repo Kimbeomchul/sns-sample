@@ -51,4 +51,10 @@ public class UserController {
         return Response.success();
     }
 
+    // 회원중복조회
+    @GetMapping("/{id}/duplicate")
+    public Response<UserResponse> duplicate(@PathVariable String id){
+        return Response.success(UserResponse.fromUser(userService.user(id)));
+    }
+
 }

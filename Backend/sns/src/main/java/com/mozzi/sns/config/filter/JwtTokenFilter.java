@@ -36,7 +36,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final String key;
     private final UserService userService;
-    private static final String[] whiteList = {"/api/*/users/join", "/api/*/users/login"};
+    private static final String[] whiteList = {"/api/*/users/join", "/api/*/users/login", "/swagger-ui.html", "/swagger-ui.html/*"};
 
 
     /**
@@ -56,10 +56,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         // 토큰 존재여부 체크
         final String header = request.getHeader("authorization");
 
-        if(!whiteListMatcher(requestURI)){
-            if(header == null || !header.startsWith("Bearer ")){
-                log.error("Error occurs while getting user info from token");
-            }
+        if(whiteListMatcher(requestURI)){
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if(header == null || !header.startsWith("Bearer ")){
+            log.error("Error occurs while getting user info from token");
             filterChain.doFilter(request, response);
             return;
         }
@@ -93,6 +96,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
 
     private boolean whiteListMatcher(String urlPath) {
-        return !PatternMatchUtils.simpleMatch(whiteList, urlPath);
+        return PatternMatchUtils.simpleMatch(whiteList, urlPath);
     }
 }

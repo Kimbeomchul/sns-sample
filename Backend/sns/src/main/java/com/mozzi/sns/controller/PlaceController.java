@@ -1,20 +1,12 @@
 package com.mozzi.sns.controller;
 
-import com.mozzi.sns.controller.request.CommentRequest;
 import com.mozzi.sns.controller.request.PlaceCreateRequest;
-import com.mozzi.sns.controller.request.PostCreateRequest;
-import com.mozzi.sns.controller.request.PostModifyRequest;
-import com.mozzi.sns.controller.response.CommentResponse;
 import com.mozzi.sns.controller.response.PlaceResponse;
-import com.mozzi.sns.controller.response.PostResponse;
 import com.mozzi.sns.controller.response.Response;
-import com.mozzi.sns.domain.PlaceType;
 import com.mozzi.sns.service.PlaceService;
-import com.mozzi.sns.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

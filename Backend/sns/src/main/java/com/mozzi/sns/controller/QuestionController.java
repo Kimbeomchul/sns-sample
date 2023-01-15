@@ -1,11 +1,8 @@
 package com.mozzi.sns.controller;
 
 import com.mozzi.sns.controller.request.*;
-import com.mozzi.sns.controller.response.CommentResponse;
-import com.mozzi.sns.controller.response.PostResponse;
 import com.mozzi.sns.controller.response.QuestionResponse;
 import com.mozzi.sns.controller.response.Response;
-import com.mozzi.sns.service.PostService;
 import com.mozzi.sns.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

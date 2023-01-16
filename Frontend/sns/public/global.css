@@ -1,6 +1,27 @@
 body {
-	margin: 0;
+	margin: 46px 0;
 	padding: 0;
+	font-family: Noto Sans KR;
+}
+
+input, textarea {
+	font-family: Noto Sans KR;
+}
+
+.button {
+	cursor: pointer;
+}
+
+.text {
+	font-weight: 500;
+	font-size: 13px;
+	letter-spacing: -0.05em;
+}
+
+
+@font-face {
+	font-family : '잘난체';
+	src : url(./font/Jalnan.ttf)
 }
 
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}

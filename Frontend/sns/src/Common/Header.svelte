@@ -1,5 +1,5 @@
 <script>
-	export let header, search
+	export let header, search = false
 </script>
 
 <div class="header-container">

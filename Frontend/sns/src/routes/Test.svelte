@@ -16,16 +16,16 @@
             <div class="title">페이지 이동</div>
             <div class="item-wraper">
                 <div class="item button">
-                    <button class="link transparent button" on:click={() => push('/login')}>로그인</button>
+                    <button class="link" on:click={() => push('/login')}>로그인</button>
                 </div>
                 <div class="item button">
-                    <button class="link transparent button" on:click={() => push('/join')}>회원가입</button>
+                    <button class="link" on:click={() => push('/join')}>회원가입</button>
                 </div>
                 <div class="item button">
-                    <button class="link transparent button" on:click={() => push('/contact')}>문의하기</button>
+                    <button class="link" on:click={() => push('/contact')}>문의하기</button>
                 </div>
                 <div class="item button">
-                    <button class="link transparent button" on:click={() => push('/board')}>게시판</button>
+                    <button class="link" on:click={() => push('/board')}>게시판</button>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="title">컴포넌트</div>
             <div class="item-wraper">
                 <div class="item button">
-                    <button class="link transparent button" on:click={() => showModal = true}>팝업 호출</button>
+                    <button class="link" on:click={() => showModal = true}>팝업 호출</button>
                 </div>
             </div>
 
@@ -103,11 +103,6 @@
                     }
                 }
             }
-        }
-
-        .transparent {
-            background: transparent;
-            border: transparent;
         }
     }
 </style>

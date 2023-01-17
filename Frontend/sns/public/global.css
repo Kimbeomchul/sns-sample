@@ -8,6 +8,12 @@ input, textarea {
 	font-family: Noto Sans KR;
 }
 
+button {
+	background: transparent;
+	border: transparent;
+	cursor: pointer;
+}
+
 .button {
 	cursor: pointer;
 }
@@ -17,7 +23,6 @@ input, textarea {
 	font-size: 13px;
 	letter-spacing: -0.05em;
 }
-
 
 @font-face {
 	font-family : '잘난체';

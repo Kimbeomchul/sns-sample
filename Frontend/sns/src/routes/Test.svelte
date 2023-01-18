@@ -3,29 +3,40 @@
     import Modal from '../Common/Modal.svelte'
 
     let showModal = false
+
+    const onlogin = () => {
+        Kakao.Auth.authorize({
+            redirectUri: 'http://localhost:8080',
+        })
+    }
+
 </script>
+
+
 
 <div class="test-root-container">
     <div class="header-container">
         <div class="header">테스트 페이지</div>
-        
     </div>
     <div class="content-container">
-    
+        
         <div class="row">
             <div class="title">페이지 이동</div>
             <div class="item-container">
                 <div class="item button">
-                    <button class="link" on:click={() => push('/login')}>로그인</button>
+                    <button class="text" on:click={() => push('/init')}>시작하기</button>
                 </div>
                 <div class="item button">
-                    <button class="link" on:click={() => push('/join')}>회원가입</button>
+                    <button class="text" on:click={() => push('/login')}>로그인</button>
                 </div>
                 <div class="item button">
-                    <button class="link" on:click={() => push('/contact')}>문의하기</button>
+                    <button class="text" on:click={() => push('/join')}>회원가입</button>
                 </div>
                 <div class="item button">
-                    <button class="link" on:click={() => push('/board')}>게시판</button>
+                    <button class="text" on:click={() => push('/contact')}>문의하기</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/board')}>게시판</button>
                 </div>
             </div>
         </div>
@@ -34,7 +45,18 @@
             <div class="title">컴포넌트</div>
             <div class="item-container">
                 <div class="item button">
-                    <button class="link" on:click={() => showModal = true}>팝업 호출</button>
+                    <button class="text" on:click={() => showModal = true}>팝업 호출</button>
+                </div>
+            </div>
+            
+        </div>
+        
+
+        <div class="row">
+            <div class="title">로그인</div>
+            <div class="item-container">
+                <div class="item button">
+                    <button class="text" on:click={onlogin}>카카오로그인</button>
                 </div>
             </div>
 
@@ -97,7 +119,7 @@
                     border: cornflowerblue solid;
                     border-radius: 20px;
 
-                    .link {
+                    .text {
                         color: aliceblue;
                         font-weight: 700;
                     }

@@ -55,6 +55,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
+	// json
+	implementation 'org.json:json:20171018'
 
 	// chat 전용 mongodb reactive, webflux 추가
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb-reactive

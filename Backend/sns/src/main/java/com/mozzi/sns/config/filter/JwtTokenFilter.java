@@ -36,7 +36,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final String key;
     private final UserService userService;
-    private static final String[] whiteList = {"/api/*/users/join", "/api/*/users/login", "/swagger-ui.html", "/swagger-ui.html/*"};
+    private static final String[] whiteList = {"/api/*/users/join", "/api/*/users/login", "/swagger-ui.html", "/swagger-ui.html/*", "/api/*/users/auth/*/callback"};
 
 
     /**

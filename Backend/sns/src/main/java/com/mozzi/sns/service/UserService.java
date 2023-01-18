@@ -1,6 +1,7 @@
 package com.mozzi.sns.service;
 
 
+import com.google.common.net.HttpHeaders;
 import com.mozzi.sns.domain.dto.User;
 import com.mozzi.sns.domain.entity.UserEntity;
 import com.mozzi.sns.exception.ErrorCode;
@@ -10,10 +11,16 @@ import com.mozzi.sns.util.CommonUtils;
 import com.mozzi.sns.util.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.Optional;
 
 
 /**
@@ -41,6 +48,12 @@ public class UserService {
 
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimes;
+
+    @Value("${kakao.rest-token-key}")
+    private String kakaoKey;
+
+    @Value("${server.url}")
+    private String serverUrl;
 
 
     // 유저체크용
@@ -90,4 +103,50 @@ public class UserService {
         UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() -> new GlobalException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
         userEntityRepository.deleteById(userEntity.getId());
     }
+
+    // 소셜로그인 처리
+    @Transactional
+    public String kakaoToken(String code){
+        WebClient tokenApi = WebClient.builder()
+                .baseUrl("https://kauth.kakao.com/oauth/token")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
+                .build();
+
+        String response = tokenApi.post()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("grant_type", "authorization_code")
+                        .queryParam("client_id", kakaoKey)
+                        .queryParam("redirect_uri", serverUrl + "/api/v1/users/auth/kakao/callback")
+                        .queryParam("code", code)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        JSONObject joToken = new JSONObject(response);
+
+        WebClient userInfo = WebClient.builder()
+                .baseUrl("https://kapi.kakao.com/v2/user/me")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
+                .defaultHeader("Authorization", "Bearer " + joToken.get("access_token"))
+                .build();
+
+        String responseInfo = userInfo.post()
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        JSONObject joInfo = new JSONObject(responseInfo);
+        log.info("######## 소셜로그인 로그인시도 :: {}" , joInfo);
+        // 유저가 존재하는경우
+        Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.get("id").toString());
+        if(!id.isPresent()) {
+            join(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");
+        }
+
+        String token = login(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");
+
+        return token;
+    }
+
 }

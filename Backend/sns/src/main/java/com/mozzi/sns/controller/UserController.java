@@ -26,12 +26,6 @@ public class UserController {
         return Response.success(UserResponse.fromUser(userService.user(authentication.getName())));
     }
 
-    // TODO 소셜로그인
-    @PostMapping
-    public Response<Void> socialUser(){
-        return Response.success();
-    }
-
     // 회원가입
     @PostMapping("/join")
     public Response<UserJoinResponse> join(@Valid @RequestBody UserJoinRequest request){
@@ -57,4 +51,16 @@ public class UserController {
         return Response.success(UserResponse.fromUser(userService.user(id)));
     }
 
+    // 소셜로그인 ( 카카오 )
+    @GetMapping("/auth/kakao/callback")
+    public Response<String> kakaoUser(@RequestParam("code") String token){
+        return Response.success(userService.kakaoToken(token));
+    }
+
+    // 소셜로그인 ( 네이버 )
+    @GetMapping("/auth/naver/callback")
+    public Response<Void> naverUser(){
+
+        return Response.success();
+    }
 }

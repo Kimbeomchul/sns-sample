@@ -14,7 +14,7 @@
     
         <div class="row">
             <div class="title">페이지 이동</div>
-            <div class="item-wraper">
+            <div class="item-container">
                 <div class="item button">
                     <button class="link" on:click={() => push('/login')}>로그인</button>
                 </div>
@@ -32,7 +32,7 @@
         
         <div class="row">
             <div class="title">컴포넌트</div>
-            <div class="item-wraper">
+            <div class="item-container">
                 <div class="item button">
                     <button class="link" on:click={() => showModal = true}>팝업 호출</button>
                 </div>
@@ -80,7 +80,7 @@
                     border-bottom: 2px solid;
                 }
                 
-                .item-wraper {
+                .item-container {
                     margin-top: 15px;
                     display: flex;
                     flex-wrap: wrap;

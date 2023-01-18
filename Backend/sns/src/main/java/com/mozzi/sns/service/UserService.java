@@ -52,6 +52,12 @@ public class UserService {
     @Value("${kakao.rest-token-key}")
     private String kakaoKey;
 
+    @Value("${naver.rest-token-client-key}")
+    private String naverClientKey;
+
+    @Value("${naver.rest-token-secret-key}")
+    private String naverSecretKey;
+
     @Value("${server.url}")
     private String serverUrl;
 
@@ -104,7 +110,53 @@ public class UserService {
         userEntityRepository.deleteById(userEntity.getId());
     }
 
-    // 소셜로그인 처리
+
+    // 소셜로그인 처리 ( 네이버 )
+    @Transactional
+    public String naverToken(String code){
+        WebClient tokenApi = WebClient.builder()
+                .baseUrl("https://nid.naver.com/oauth2.0/token")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
+                .build();
+
+        String response = tokenApi.post()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("grant_type", "authorization_code")
+                        .queryParam("client_id", naverClientKey)
+                        .queryParam("client_secret", naverSecretKey)
+                        .queryParam("code", code)
+                        .build())
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        JSONObject joToken = new JSONObject(response);
+
+        WebClient userInfo = WebClient.builder()
+                .baseUrl("https://openapi.naver.com/v1/nid/me")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=utf-8")
+                .defaultHeader("Authorization", "Bearer " + joToken.get("access_token"))
+                .build();
+
+        String responseInfo = userInfo.post()
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        JSONObject joInfo = new JSONObject(responseInfo);
+        log.info("######## 소셜로그인 네이버 로그인시도 :: {}" , joInfo);
+        // 유저가 존재하는경우
+        Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.getJSONObject("response").get("id").toString());
+        if(id.isEmpty()) {
+            // 회원가입 진행
+            UserEntity registerNaver = UserEntity.of((String) joInfo.getJSONObject("response").get("id"), bCryptPasswordEncoder.encode("Gwacheon2NaverLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("response").get("profile_image")));
+            userEntityRepository.saveAndFlush(registerNaver);
+        }
+
+        return login(joInfo.getJSONObject("response").get("id").toString(), "Gwacheon2NaverLogin");
+    }
+
+    // 소셜로그인 처리 ( 카카오 )
     @Transactional
     public String kakaoToken(String code){
         WebClient tokenApi = WebClient.builder()
@@ -137,16 +189,15 @@ public class UserService {
                 .block();
 
         JSONObject joInfo = new JSONObject(responseInfo);
-        log.info("######## 소셜로그인 로그인시도 :: {}" , joInfo);
+        log.info("######## 소셜로그인 카카오 로그인시도 :: {}" , joInfo);
         // 유저가 존재하는경우
         Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.get("id").toString());
-        if(!id.isPresent()) {
-            join(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");
+        if(id.isEmpty()) {
+            // 회원가입 진행
+            UserEntity registerKakao = UserEntity.of((String) joInfo.get("id"), bCryptPasswordEncoder.encode("Gwacheon2KakaoLogin"), CommonUtils.randomNickname(), (String) joInfo.getJSONObject("properties").get("profile_image"));
+            userEntityRepository.saveAndFlush(registerKakao);
         }
-
-        String token = login(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");
-
-        return token;
+        return login(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");
     }
 
 }

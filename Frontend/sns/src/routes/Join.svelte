@@ -24,20 +24,20 @@
         <div class="join-form">
             <div class="input-row">
                 <div class="input-name">아이디</div>
-                <div class="input-wrap inner-button">
+                <div class="input-container inner-button">
                     <input class="input" type="text" placeholder="아이디를 입력해주세요">
                     <div class="duplicate-check button">중복확인</div>
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">비밀번호</div>
-                <div class="input-wrap">
+                <div class="input-container">
                     <input class="input" type="text" placeholder="비밀번호를 입력해주세요">
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">닉네임</div>
-                <div class="input-wrap">
+                <div class="input-container">
                     <input class="input" type="text" placeholder="비밀번호를 입력해주세요">
                 </div>
             </div>
@@ -94,7 +94,7 @@
                     font-weight: 500;
                 }
                 
-                .input-wrap {
+                .input-container {
                     margin-top: 8px;
                     .input {
                         line-height: 19px;

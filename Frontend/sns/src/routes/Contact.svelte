@@ -8,19 +8,19 @@
         <div class="contact-form">
             <div class="input-row">
                 <div class="input-name">답변 받으실 이메일</div>
-                <div class="input-wrap">
+                <div class="input-wrapper">
                     <input class="input" type="text" placeholder="이메일 주소를 입력해주세요">
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">문의 유형</div>
-                <div class="input-wrap">
+                <div class="input-wrapper">
                     <input class="input" type="text" value="로그인 불가" disabled>
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">문의 내용</div>
-                <div class="textarea-wrap">
+                <div class="textarea-wrapper">
                     <textarea class="contact-content" placeholder="아이디와 로그인 불가 사유를 입력해주세요"></textarea>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         letter-spacing: -0.05em;
                     }
                     
-                    .input-wrap {
+                    .input-wrapper {
                         margin-top: 8px;
                         .input {
                             font-size: 13px;
@@ -76,7 +76,7 @@
                         }
                     }
 
-                    .textarea-wrap {
+                    .textarea-wrapper {
                         margin-top: 11px;
 
                         .contact-content {

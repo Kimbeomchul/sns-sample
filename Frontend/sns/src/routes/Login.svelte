@@ -9,13 +9,13 @@
         <div class="login-form">
             <div class="input-row">
                 <div class="input-name">아이디</div>
-                <div class="input-wrap">
+                <div class="input-wrapper">
                     <input class="input" type="text" placeholder="아이디를 입력해주세요">
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">비밀번호</div>
-                <div class="input-wrap">
+                <div class="input-wrapper">
                     <input class="input" type="text" placeholder="비밀번호를 입력해주세요">
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 }
 
                 
-                .input-wrap {
+                .input-wrapper {
                     margin-top: 8px;
 
                     .input {

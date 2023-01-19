@@ -1,8 +1,41 @@
 <script>
+    import axios from 'axios'
     import { push } from 'svelte-spa-router'
     import Modal from '../Common/Modal.svelte'
 
     let showModal = false
+
+    const token = new URLSearchParams(location.search).get('code')
+    // token && alert(token)
+
+    // if(token) {
+    //     axios(`http://localhost:8081/api/v1/users/auth/kakao/callback?code=` + token)
+    // }
+
+    const onKakaoLogin = () => {
+        Kakao.Auth.authorize({
+            // redirectUri: 'http://localhost:8080',
+            redirectUri: 'http://localhost:8081/api/v1/users/auth/kakao/callback',
+            // prompts: 'login',
+        })
+    }
+    const onNaverLogin = () => {
+        const naverLoginButton = document.getElementById('naver_id_login_anchor')
+        naverLoginButton.click()
+
+        // // 접근 토큰 값 출력
+        // alert(naver_id_login.oauthParams.access_token);
+        // // 네이버 사용자 프로필 조회
+        // naver_id_login.get_naver_userprofile("naverSignInCallback()");
+        // // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+        // function naverSignInCallback() {
+        //     alert(naver_id_login.getProfileData('email'));
+        //     alert(naver_id_login.getProfileData('nickname'));
+        //     alert(naver_id_login.getProfileData('age'));
+        // }
+
+    }
+
 </script>
 
 <div class="test-root-container">
@@ -37,8 +70,8 @@
                     <button class="link" on:click={() => showModal = true}>팝업 호출</button>
                 </div>
             </div>
-
         </div>
+
     </div>
 
     {#if showModal}

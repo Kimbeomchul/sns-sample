@@ -11,8 +11,31 @@
 	<link rel='stylesheet' href='/build/bundle.css'>
 
 	<script defer src='/build/bundle.js'></script>
+
+	<!-- 카카오 로그인 SDK -->
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+	integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
+
+	<!-- 네이버 로그인 SDK -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 </head>
 
 <body>
+	<div id="naver_id_login" style="display: none;"></div>
+	<script>
+		// 카카오 로그인
+		!Kakao.isInitialized() && Kakao.init('a22aac7f096f02f12c949ed4e5fe2286')
+
+		// 네이버 로그인
+		var naver_id_login = new naver_id_login("DylBYoCVojylWmIYyfbA", "http://localhost:8080")
+        var state = naver_id_login.getUniqState()
+        naver_id_login.setButton("white", 2,40)
+        naver_id_login.setDomain("http://localhost:8080")
+        naver_id_login.setState(state)
+        // naver_id_login.setPopup()
+        naver_id_login.init_naver_id_login()
+	</script>
 </body>
 </html>

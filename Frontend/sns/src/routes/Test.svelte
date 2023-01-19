@@ -4,15 +4,29 @@
 
     let showModal = false
 
-    const onlogin = () => {
+    const onKakaoLogin = () => {
         Kakao.Auth.authorize({
             redirectUri: 'http://localhost:8080',
         })
     }
+    const onNaverLogin = () => {
+        const naverLoginButton = document.getElementById('naver_id_login_anchor')
+        naverLoginButton.click()
+
+        // // 접근 토큰 값 출력
+        // alert(naver_id_login.oauthParams.access_token);
+        // // 네이버 사용자 프로필 조회
+        // naver_id_login.get_naver_userprofile("naverSignInCallback()");
+        // // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+        // function naverSignInCallback() {
+        //     alert(naver_id_login.getProfileData('email'));
+        //     alert(naver_id_login.getProfileData('nickname'));
+        //     alert(naver_id_login.getProfileData('age'));
+        // }
+
+    }
 
 </script>
-
-
 
 <div class="test-root-container">
     <div class="header-container">
@@ -56,7 +70,10 @@
             <div class="title">로그인</div>
             <div class="item-container">
                 <div class="item button">
-                    <button class="text" on:click={onlogin}>카카오로그인</button>
+                    <button class="text" on:click={onKakaoLogin}>카카오로그인</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={onNaverLogin}>네이버로그인</button>
                 </div>
             </div>
 

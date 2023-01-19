@@ -37,26 +37,26 @@
         }
         
         .social-login-container {
+            margin: auto;
+            max-width: 318px;
             margin-top: 100px;
-            text-align: center;
             
             .login_button {
                 margin-top: 10px;
             }
-        }
 
-        .contact-wrapper {
-
-            .contact {
-                margin-top: 13px;
-                font-weight: 500;
-                font-size: 13px;
-                line-height: 19px;
-                letter-spacing: -0.05em;
-                color: #A8A8A8;
-
-                // display: flex;
-                // justify-content: center;
+            .contact-wrapper {
+    
+                .contact {
+                    margin-top: 13px;
+                    margin-right: 10px;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 19px;
+                    letter-spacing: -0.05em;
+                    color: #A8A8A8;
+                    text-align: end;
+                }
             }
         }
 

@@ -1,9 +1,10 @@
 <script>
-	export let header, search = false
+	import { pop } from 'svelte-spa-router'
+    export let header, search = false
 </script>
 
 <div class="header-container">
-    <div class="header-back"><img src='./images/back.png' alt='' /></div>
+    <div class="header-back" on:click={() => pop()} aria-hidden="true" ><img src='./images/back.png' alt='' /></div>
     <div class="header">{header}</div>
     {#if search} 
     <div class="header-search"><img src='./images/search.png' alt='' /></div>

@@ -44,7 +44,7 @@ public class PostController {
      */
     @PostMapping
     public Response<Void> create(@Valid @RequestBody PostCreateRequest request, Authentication authentication){
-        postService.create(request.getTitle(), request.getContent(), request.getHashtag(), authentication.getName());
+        postService.create(request.getTitle(), request.getContent(), request.getCategory(), authentication.getName());
         return Response.success();
     }
 

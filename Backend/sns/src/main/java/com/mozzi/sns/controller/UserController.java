@@ -29,7 +29,7 @@ public class UserController {
     // 회원가입
     @PostMapping("/join")
     public Response<UserJoinResponse> join(@Valid @RequestBody UserJoinRequest request){
-        return Response.success(UserJoinResponse.fromUser(userService.join(request.getUserName(), request.getPassword())));
+        return Response.success(UserJoinResponse.fromUser(userService.join(request.getUserName(), request.getPassword(), request.getNickName())));
     }
 
     // 로그인

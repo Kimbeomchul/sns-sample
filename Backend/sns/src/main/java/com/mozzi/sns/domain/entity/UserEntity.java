@@ -1,5 +1,6 @@
 package com.mozzi.sns.domain.entity;
 
+import com.mozzi.sns.domain.SocialType;
 import com.mozzi.sns.domain.UserLive;
 import com.mozzi.sns.domain.UserRole;
 import lombok.Getter;
@@ -54,6 +55,10 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private UserLive livingAt = UserLive.None; // 사는곳
 
+    @Column(name = "social_type")
+    @Enumerated(EnumType.STRING) @Setter
+    private SocialType socialType; // 소셜종류
+
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER; // 유저 권한
@@ -85,12 +90,13 @@ public class UserEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static UserEntity of(String userName, String password, String nickname, String userImage){
+    public static UserEntity of(String userName, String password, String nickname, String userImage, SocialType socialType){
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userName);
         userEntity.setPassword(password);
         userEntity.setNickname(nickname);
         userEntity.setUserImage(userImage);
+        userEntity.setSocialType(socialType);
         return userEntity;
     }
 }

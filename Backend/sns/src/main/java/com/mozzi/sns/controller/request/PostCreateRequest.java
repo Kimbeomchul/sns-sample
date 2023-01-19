@@ -13,6 +13,7 @@ public class PostCreateRequest {
     private String title;
     @NotNull
     private String content;
-    private String hashtag;
+    @NotNull
+    private String category;
 
 }

@@ -1,5 +1,6 @@
 package com.mozzi.sns.util;
 
+import com.mozzi.sns.domain.SocialType;
 import com.mozzi.sns.domain.UserLive;
 import com.mozzi.sns.domain.UserRole;
 import io.jsonwebtoken.Claims;
@@ -55,11 +56,12 @@ public class JwtTokenUtils {
     /**
      * JWT 토큰생성
      */
-    public static String generateToken(String userName, String nickName, String userImage, UserLive userLive,  UserRole userRole, Timestamp registeredAt, String key, long expiredTimeMs){
+    public static String generateToken(String userName, String nickName, String userImage, UserLive userLive, SocialType socialType, UserRole userRole, Timestamp registeredAt, String key, long expiredTimeMs){
         Claims claims = Jwts.claims();
         claims.put("userName", userName);
         claims.put("nickName", nickName);
         claims.put("userImage", userImage);
+        claims.put("socialType", socialType);
         claims.put("userLive", userLive);
         claims.put("userRole", userRole);
         claims.put("registeredAt", registeredAt);

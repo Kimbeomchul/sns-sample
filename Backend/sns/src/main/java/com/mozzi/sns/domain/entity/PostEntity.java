@@ -45,8 +45,8 @@ public class PostEntity {
     private String content;
 
     @Setter
-    @Column(name = "hashtag")
-    private String hashtag;
+    @Column(name = "category")
+    private String category;
 
     @ManyToOne @Setter
     @JoinColumn(name = "user_id")
@@ -76,11 +76,11 @@ public class PostEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static PostEntity of(String title, String content,String hashtag, UserEntity userEntity){
+    public static PostEntity of(String title, String content,String category, UserEntity userEntity){
         PostEntity postEntity = new PostEntity();
         postEntity.setTitle(title);
         postEntity.setContent(content);
-        postEntity.setHashtag(hashtag);
+        postEntity.setCategory(category);
         postEntity.setUser(userEntity);
         return postEntity;
     }

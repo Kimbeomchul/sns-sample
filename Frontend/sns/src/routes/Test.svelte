@@ -1,12 +1,22 @@
 <script>
+    import axios from 'axios'
     import { push } from 'svelte-spa-router'
     import Modal from '../Common/Modal.svelte'
 
     let showModal = false
 
+    const token = new URLSearchParams(location.search).get('code')
+    // token && alert(token)
+
+    // if(token) {
+    //     axios(`http://localhost:8081/api/v1/users/auth/kakao/callback?code=` + token)
+    // }
+
     const onKakaoLogin = () => {
         Kakao.Auth.authorize({
-            redirectUri: 'http://localhost:8080',
+            // redirectUri: 'http://localhost:8080',
+            redirectUri: 'http://localhost:8081/api/v1/users/auth/kakao/callback',
+            // prompts: 'login',
         })
     }
     const onNaverLogin = () => {
@@ -76,8 +86,8 @@
                     <button class="text" on:click={onNaverLogin}>네이버로그인</button>
                 </div>
             </div>
-
         </div>
+
     </div>
 
     {#if showModal}

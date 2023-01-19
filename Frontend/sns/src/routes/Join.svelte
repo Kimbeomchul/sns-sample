@@ -1,5 +1,26 @@
 <script>
+    import axios from "axios";
     import Header from "../Common/Header.svelte"
+
+    let id = 'joohwan', password = '1234', nickName = '주환'
+
+    const join = () => {
+        axios.post('http://localhost:8081/api/v1/users/join', {
+            userName: id,
+            password,
+            nickName
+        }).then((res) => {
+            if(res.resultCode === 'OK') {
+                axios.post('http://localhost:8081/api/v1/users/login', {
+                    userName: id,
+                    password,
+                    nickName
+                }).then(res => {
+                    console.log(res);
+                })
+            }
+        })
+    }
 </script>
 
 <div class="join-root-container">
@@ -25,26 +46,26 @@
             <div class="input-row">
                 <div class="input-name">아이디</div>
                 <div class="input-container inner-button">
-                    <input class="input" type="text" placeholder="아이디를 입력해주세요">
+                    <input class="input" type="text" placeholder="아이디를 입력해주세요"bind:value={id}>
                     <div class="duplicate-check button">중복확인</div>
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">비밀번호</div>
                 <div class="input-container">
-                    <input class="input" type="text" placeholder="비밀번호를 입력해주세요">
+                    <input class="input" type="password" placeholder="비밀번호를 입력해주세요" bind:value={password}>
                 </div>
             </div>
             <div class="input-row">
                 <div class="input-name">닉네임</div>
                 <div class="input-container">
-                    <input class="input" type="text" placeholder="비밀번호를 입력해주세요">
+                    <input class="input" type="text" placeholder="비밀번호를 입력해주세요" bind:value={nickName}>
                 </div>
             </div>
         </div>
-        <div class="button join-button">
+        <button class="join-button" on:click={join}>
             <span>회원가입</span>
-        </div>
+        </button>
     </div>
 </div>
 
@@ -141,6 +162,7 @@
             }
 
             .join-button {
+                width: 100%;
                 margin-top: 90px;
                 border-radius: 27px;
                 background-color: #377375;

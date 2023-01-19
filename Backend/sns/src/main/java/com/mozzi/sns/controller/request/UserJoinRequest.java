@@ -12,4 +12,5 @@ public class UserJoinRequest {
     private String userName;
     @NotNull
     private String password;
+    private String nickName;
 }

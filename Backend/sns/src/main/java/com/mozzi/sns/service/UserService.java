@@ -2,6 +2,7 @@ package com.mozzi.sns.service;
 
 
 import com.google.common.net.HttpHeaders;
+import com.mozzi.sns.domain.SocialType;
 import com.mozzi.sns.domain.dto.User;
 import com.mozzi.sns.domain.entity.UserEntity;
 import com.mozzi.sns.exception.ErrorCode;
@@ -70,13 +71,19 @@ public class UserService {
 
     // 회원가입
     @Transactional
-    public User join(String userName, String password) {
+    public User join(String userName, String password, String nickName) {
         // 회원가입 체크
         userEntityRepository.findByUserName(userName).ifPresent(it -> {
             throw new GlobalException(ErrorCode.DUPLICATED_USER_NAME, String.format("%s is duplicated", userName));
         });
+
+        // 닉네임체크
+        if(nickName.equals("") || nickName == null){
+            nickName = CommonUtils.randomNickname();
+        }
+
         // 회원가입 진행
-        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName, bCryptPasswordEncoder.encode(password), CommonUtils.randomNickname(), "default"));
+        UserEntity userEntity = userEntityRepository.save(UserEntity.of(userName, bCryptPasswordEncoder.encode(password), nickName, "default", SocialType.NORMAL));
         return User.fromEntity(userEntity);
     }
 
@@ -149,7 +156,7 @@ public class UserService {
         Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.getJSONObject("response").get("id").toString());
         if(id.isEmpty()) {
             // 회원가입 진행
-            UserEntity registerNaver = UserEntity.of((String) joInfo.getJSONObject("response").get("id"), bCryptPasswordEncoder.encode("Gwacheon2NaverLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("response").get("profile_image")));
+            UserEntity registerNaver = UserEntity.of(String.valueOf(joInfo.getJSONObject("response").get("id")), bCryptPasswordEncoder.encode("Gwacheon2NaverLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("response").get("profile_image")), SocialType.KAKAO);
             userEntityRepository.saveAndFlush(registerNaver);
         }
 
@@ -194,7 +201,7 @@ public class UserService {
         Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.get("id").toString());
         if(id.isEmpty()) {
             // 회원가입 진행
-            UserEntity registerKakao = UserEntity.of((String) joInfo.get("id"), bCryptPasswordEncoder.encode("Gwacheon2KakaoLogin"), CommonUtils.randomNickname(), (String) joInfo.getJSONObject("properties").get("profile_image"));
+            UserEntity registerKakao = UserEntity.of(String.valueOf(joInfo.get("id")), bCryptPasswordEncoder.encode("Gwacheon2KakaoLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("properties").get("profile_image")),  SocialType.NAVER);
             userEntityRepository.saveAndFlush(registerKakao);
         }
         return login(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");

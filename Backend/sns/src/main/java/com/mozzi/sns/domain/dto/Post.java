@@ -13,6 +13,7 @@ public class Post {
     private Long id;
     private String title;
     private String body;
+    private String category;
     private User user;
     private Timestamp registeredAt;
     private Timestamp updatedAt;
@@ -24,6 +25,7 @@ public class Post {
                 entity.getId(),
                 entity.getTitle(),
                 entity.getContent(),
+                entity.getCategory(),
                 User.fromEntity(entity.getUser()),
                 entity.getRegisteredAt(),
                 entity.getUpdatedAt(),

@@ -60,7 +60,7 @@ public class PostService {
     }
     
     @Transactional
-    public void modify(String title, String content, String hashtag, String userName, Long id){
+    public void modify(String title, String content, String category, String userName, Long id){
         UserEntity userEntity = getUserEntity(userName);
         PostEntity postEntity = getPostEntity(id);
 
@@ -70,7 +70,7 @@ public class PostService {
 
         postEntity.setTitle(title);
         postEntity.setContent(content);
-        postEntity.setHashtag(hashtag);
+        postEntity.setCategory(category);
         postEntityRepository.save(postEntity);
     }
 

@@ -7,6 +7,7 @@
     import Join from './routes/Join.svelte'
     import Login from './routes/Login.svelte'
     import Test from './routes/Test.svelte'
+    import User from './routes/User.svelte'
 </script>
 
 <Router routes = {{
@@ -16,5 +17,6 @@
     '/join': Join,
     '/contact': Contact,
     '/board': Board,
+    '/user': User,
 }} />
 

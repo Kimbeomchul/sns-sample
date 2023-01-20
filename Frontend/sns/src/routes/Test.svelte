@@ -6,17 +6,11 @@
     let showModal = false
 
     const token = new URLSearchParams(location.search).get('code')
-    // token && alert(token)
-
-    // if(token) {
-    //     axios(`http://localhost:8081/api/v1/users/auth/kakao/callback?code=` + token)
-    // }
 
     const onKakaoLogin = () => {
         Kakao.Auth.authorize({
-            // redirectUri: 'http://localhost:8080',
             redirectUri: 'http://localhost:8081/api/v1/users/auth/kakao/callback',
-            // prompts: 'login',
+            prompts: 'login',
         })
     }
     const onNaverLogin = () => {
@@ -61,6 +55,9 @@
                 </div>
                 <div class="item button">
                     <button class="text" on:click={() => push('/board')}>게시판</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/user')}>내정보</button>
                 </div>
             </div>
         </div>

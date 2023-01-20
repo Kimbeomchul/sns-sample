@@ -10,6 +10,7 @@ import com.mozzi.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
@@ -53,13 +54,19 @@ public class UserController {
 
     // 소셜로그인 ( 카카오 )
     @GetMapping("/auth/kakao/callback")
-    public Response<String> kakaoUser(@RequestParam("code") String code){
-        return Response.success(userService.kakaoToken(code));
+    public RedirectView kakaoUser(@RequestParam("code") String code){
+        RedirectView rv = new RedirectView();
+        String token = userService.kakaoToken(code);
+        rv.setUrl("http://localhost:8080?token="+token);
+        return rv;
     }
 
     // 소셜로그인 ( 네이버 )
     @GetMapping("/auth/naver/callback")
-    public Response<String> naverUser(@RequestParam("code") String code){
-        return Response.success(userService.naverToken(code));
+    public RedirectView naverUser(@RequestParam("code") String code){
+        RedirectView rv = new RedirectView();
+        String token = userService.kakaoToken(code);
+        rv.setUrl("http://localhost:8080?token="+token);
+        return rv;
     }
 }

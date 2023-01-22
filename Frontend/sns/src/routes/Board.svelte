@@ -1,7 +1,8 @@
 <script>
     import Header from "../Common/Header.svelte"
     import Footer from "../Common/Footer.svelte"
-    import {clickOutside} from '../js/clickOutside'
+    import { clickOutside } from '../js/clickOutside'
+    import { push } from 'svelte-spa-router'
 
     // 임시 데이터
     const content = [
@@ -61,14 +62,22 @@
         },
     ]
 
-    const selectedFilter = '최신순'
+    const filters = {
+        new: '최신순',
+        like: '좋아요순'
+    }
+
+    let selectedFilter = filters['new']
     let isLiked = false
     let expanded = false
     let selectedCategory = 'daily'
 
     const handleClickFilter = () => expanded = !expanded
+    const handleClickFilterOption = (filter) => {
+        if(selectedFilter !== filters[filter]) expanded = false
+        selectedFilter = filters[filter]
+    }
     const handleClickOutside = (event) => expanded = false
-
     const handleClickCategory = (category) => selectedCategory = category
 </script>
 
@@ -102,13 +111,15 @@
     </div>
     <div class="board-filter-area">
         <div class="filter-area">
-            <div class="selected-area" on:click={handleClickFilter} use:clickOutside on:click_outside={handleClickOutside} aria-hidden="true">
-                <div class="selected">{selectedFilter}</div>
-                <img src='/images/bottomArrow.png' alt=''/>
+            <div class="filter-selected-area" use:clickOutside on:click_outside={handleClickOutside} aria-hidden="true">
+                <div class="selected-area" on:click={handleClickFilter} aria-hidden="true">
+                    <div class="selected">{selectedFilter}</div>
+                    <img src='/images/bottomArrow.png' alt=''/>
+                </div>
                 {#if expanded}
                     <div class="filter-list-area">
-                        <div class="filter-list">최신순</div>
-                        <div class="filter-list">좋아요순</div>
+                        <div class="filter-list" on:click={() => {handleClickFilterOption('new')}} aria-hidden='true'>최신순</div>
+                        <div class="filter-list" on:click={() => {handleClickFilterOption('like')}} aria-hidden='true'>좋아요순</div>
                     </div>
                 {/if}
             </div>
@@ -143,7 +154,7 @@
             </div>
         {/each}
     </div>
-    <div class="border-write-button">+</div>
+    <div class="border-write-button" on:click={() => push('/')} aria-hidden='true'>+</div>
     <Footer />
 </div>
 
@@ -280,12 +291,18 @@
                 justify-content: space-between;
                 align-items: center;
 
-                .selected-area {
+                .filter-selected-area {
                     position: relative;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     min-height: 18px;
+
+                    .selected-area {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                    }
 
                     img {
                         width: 11px;

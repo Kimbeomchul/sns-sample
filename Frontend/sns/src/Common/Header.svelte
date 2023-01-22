@@ -22,6 +22,7 @@
         width: calc(100vw - 60px);
         height: 53px;
         padding: 0 30px;
+        background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(196, 196, 196, 0.063) 100%);
 
         .header {
             font-family: 'Noto Sans KR';

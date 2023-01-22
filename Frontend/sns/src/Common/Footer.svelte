@@ -1,4 +1,6 @@
 <script>
+    import { push } from 'svelte-spa-router'
+
     export let activedMenuIndex = 0
     const menus = [
         {
@@ -21,7 +23,10 @@
     let activedMenu = menus[activedMenuIndex]
 
     const isActiveMenu = selectedMenu => selectedMenu.id === activedMenu.id
-    const onClicked = menu => activedMenu = menu
+    const onClicked = menu => { 
+        activedMenu = menu
+        push(menu.id)
+    }
     
 </script>
 

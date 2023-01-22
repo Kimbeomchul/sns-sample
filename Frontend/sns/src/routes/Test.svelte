@@ -62,6 +62,9 @@
                 <div class="item button">
                     <button class="text" on:click={() => push('/write')}>게시판 글쓰기</button>
                 </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/chat')}>채팅</button>
+                </div>
             </div>
         </div>
         

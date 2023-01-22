@@ -55,7 +55,7 @@
             </div>
         </button>
     </div>
-    <Footer />
+    <Footer activedMenuIndex=3/>
 </div>
 
 <style lang="scss">

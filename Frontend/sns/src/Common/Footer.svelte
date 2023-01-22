@@ -1,4 +1,5 @@
 <script>
+    export let activedMenuIndex = 0
     const menus = [
         {
             id: 'home',
@@ -17,7 +18,7 @@
             name: 'my'
         },
     ]
-    let activedMenu = menus[0]
+    let activedMenu = menus[activedMenuIndex]
 
     const isActiveMenu = selectedMenu => selectedMenu.id === activedMenu.id
     const onClicked = menu => activedMenu = menu

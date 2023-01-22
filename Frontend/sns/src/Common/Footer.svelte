@@ -25,7 +25,7 @@
     const isActiveMenu = selectedMenu => selectedMenu.id === activedMenu.id
     const onClicked = menu => { 
         activedMenu = menu
-        push(menu.id)
+        push(`/${menu.id}`)
     }
     
 </script>

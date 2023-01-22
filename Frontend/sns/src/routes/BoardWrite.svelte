@@ -140,6 +140,7 @@
                 text-align: center;
                 letter-spacing: -0.05em;
                 color: #FFFFFF;
+                margin-bottom: 40px;
             }
         }
     }

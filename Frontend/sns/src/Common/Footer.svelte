@@ -1,57 +1,44 @@
 <script>
     const menus = [
         {
-            name: '홈',
-            image: './images/footer/home.svg',
-            class: 'footer-menu-item'
+            id: 'home',
+            name: '홈'
         },
         {
-            name: '커뮤니티',
-            image: './images/footer/community.svg',
-            class: 'footer-menu-item'
+            id: 'community',
+            name: '커뮤니티'
         },
         {
-            name: '채팅',
-            image: './images/footer/chat.svg',
-            class: 'footer-menu-item'
+            id: 'chat',
+            name: '채팅'
         },
         {
-            name: 'My',
-            image: './images/footer/user.svg',
-            class: 'footer-menu-item'
+            id: 'user',
+            name: 'my'
         },
     ]
-    
-    const onclicked = e => {
-        console.log(e);
-    }
+    let activedMenu = menus[0]
+
+    const isActiveMenu = selectedMenu => selectedMenu.id === activedMenu.id
+    const onClicked = menu => activedMenu = menu
     
 </script>
 
 <div class="footer-root-container">
     <div class="footer-menu-container">
-        {#each menus as menu}
-            <button class={menu.class} on:click={() => onclicked(menu)}>
-                <img src={menu.image} alt={menu.name}>
-                <span>{menu.name}</span>
-            </button>
-        {/each}
-        <!-- <div class="footer-menu-item">
-            <img src="./images/footer/home.svg" alt="">
-            <span>홈</span>
-        </div>
-        <div class="footer-menu-item">
-            <img src="./images/footer/community.svg" alt="">
-            <span>커뮤니티</span>
-        </div>
-        <div class="footer-menu-item">
-            <img src="./images/footer/chat.svg" alt="">
-            <span>채팅</span>
-        </div>
-        <div class="footer-menu-item">
-            <img src="./images/footer/user.svg" alt="">
-            <span>내정보</span>
-        </div> -->
+        {#key activedMenu}
+            {#each menus as menu}
+                <button class="menu-item" on:click={() => onClicked(menu)}>
+                    {#if isActiveMenu(menu)}
+                        <img src= './images/footer/{menu.id}-active.svg' alt={menu.name}>
+                        <span class="menu-active">{menu.name}</span>
+                        {:else}
+                        <img src= './images/footer/{menu.id}.svg' alt={menu.name}>
+                        <span>{menu.name}</span>
+                    {/if}
+                </button>
+            {/each}
+        {/key}
     </div>
 </div>
 
@@ -71,13 +58,17 @@
             align-items: center;
             height: 100%;
 
-            .footer-menu-item {
+            .menu-item {
                 display: flex;
                 flex-direction: column;
                 gap: 3px;
                 align-items: center;
                 font-size: 10px;
                 color: #A1A1A1;
+
+                .menu-active {
+                    color: #377375;
+                }
             }
 
         }

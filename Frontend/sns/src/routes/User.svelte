@@ -60,6 +60,7 @@
 
 <style lang="scss">
     .user-root-container {
+        margin-bottom: 87px;
 
         .user-info-container {
             margin-top: 43px;

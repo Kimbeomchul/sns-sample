@@ -278,7 +278,8 @@
 
 <style lang="scss">
     .chat-root-container {
-
+        margin-bottom: 87px;
+        
         .chat-list-container {
             margin-top: 30px;
             

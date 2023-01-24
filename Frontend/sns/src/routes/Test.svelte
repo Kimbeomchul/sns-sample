@@ -51,6 +51,9 @@
                     <button class="text" on:click={() => push('/join')}>회원가입</button>
                 </div>
                 <div class="item button">
+                    <button class="text" on:click={() => push('/main')}>메인</button>
+                </div>
+                <div class="item button">
                     <button class="text" on:click={() => push('/contact')}>문의하기</button>
                 </div>
                 <div class="item button">

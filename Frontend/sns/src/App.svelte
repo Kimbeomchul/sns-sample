@@ -3,12 +3,13 @@
     import Modal from './Common/Modal.svelte'
     import Board from './routes/Board/Board.svelte'
     import BoardWrite from './routes/Board/BoardWrite.svelte'
-    import BoardDetail from './routes/Board/BoardDetail.svelte'
+    // import BoardDetail from './routes/Board/BoardDetail.svelte'
     import Chat from './routes/Chat.svelte'
     import Contact from './routes/Contact.svelte'
     import Init from './routes/Init.svelte'
     import Join from './routes/Join.svelte'
     import Login from './routes/Login.svelte'
+    import Main from './routes/Main.svelte'
     import Test from './routes/Test.svelte'
     import User from './routes/User.svelte'
 </script>
@@ -19,6 +20,7 @@
     '/login': Login,
     '/join': Join,
     '/contact': Contact,
+    '/main': Main,
     '/board': Board,
     '/board/write': BoardWrite,
     '/user': User,

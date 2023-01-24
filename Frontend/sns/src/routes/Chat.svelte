@@ -28,7 +28,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -50,7 +49,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -72,7 +70,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -94,7 +91,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -116,7 +112,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -138,7 +133,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -160,7 +154,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -182,7 +175,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -204,7 +196,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -226,7 +217,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -248,7 +238,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
         <div class="chat-item-container">
             <div class="chat-item-wrapper">
@@ -270,7 +259,6 @@
                     </div>
                 </div>
             </div>
-            <div class="separator" />
         </div>
     </div>
     <Footer activedMenuIndex=2/>
@@ -281,9 +269,14 @@
         margin-bottom: 87px;
         
         .chat-list-container {
-            margin-top: 30px;
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
             
             .chat-item-container {
+                padding-bottom: 23px;
+                background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(196, 196, 196, 0.063));
                 margin-left: 7.5%;
                 margin-right: 7.5%;
                 
@@ -354,11 +347,6 @@
                             color: #FFFFFF;
                         }
                     }
-                }
-
-                .separator {
-                    height: 23px;
-                    background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(196, 196, 196, 0.063) 100%);
                 }
             }
         }

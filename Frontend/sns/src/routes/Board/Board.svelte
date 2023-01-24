@@ -1,7 +1,7 @@
 <script>
-    import Header from "../Common/Header.svelte"
-    import Footer from "../Common/Footer.svelte"
-    import { clickOutside } from '../js/clickOutside'
+    import Header from "../../Common/Header.svelte"
+    import Footer from "../../Common/Footer.svelte"
+    import { clickOutside } from '../../js/clickOutside'
     import { push } from 'svelte-spa-router'
 
     // 임시 데이터

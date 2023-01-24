@@ -1,7 +1,7 @@
 <script>
-    import Footer from "../Common/Footer.svelte"
-    import Header from "../Common/Header.svelte"
-    import { clickOutside } from '../js/clickOutside'
+    import Footer from "../../Common/Footer.svelte"
+    import Header from "../../Common/Header.svelte"
+    import { clickOutside } from '../../js/clickOutside'
 
     const categorys = {
         daily: '일상',

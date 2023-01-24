@@ -19,7 +19,7 @@
     '/join': Join,
     '/contact': Contact,
     '/board': Board,
-    '/write': BoardWrite,
+    '/board/write': BoardWrite,
     '/user': User,
     '/chat': Chat,
 }} />

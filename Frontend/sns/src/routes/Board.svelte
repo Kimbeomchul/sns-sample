@@ -154,7 +154,7 @@
             </div>
         {/each}
     </div>
-    <div class="border-write-button" on:click={() => push('/')} aria-hidden='true'>+</div>
+    <div class="border-write-button" on:click={() => push('/board/write')} aria-hidden='true'>+</div>
     <Footer />
 </div>
 

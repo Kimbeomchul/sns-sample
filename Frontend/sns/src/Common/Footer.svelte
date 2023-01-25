@@ -4,7 +4,7 @@
     export let activedMenuIndex = 0
     const menus = [
         {
-            id: 'home',
+            id: 'main',
             name: '홈'
         },
         {
@@ -23,6 +23,7 @@
     let activedMenu = menus[activedMenuIndex]
 
     const isActiveMenu = selectedMenu => selectedMenu.id === activedMenu.id
+
     const onClicked = menu => { 
         activedMenu = menu
         push(`/${menu.id}`)
@@ -32,19 +33,12 @@
 
 <div class="footer-root-container">
     <div class="footer-menu-container">
-        {#key activedMenu}
-            {#each menus as menu}
-                <button class="menu-item" on:click={() => onClicked(menu)}>
-                    {#if isActiveMenu(menu)}
-                        <img src= './images/footer/{menu.id}-active.svg' alt={menu.name}>
-                        <span class="menu-active">{menu.name}</span>
-                        {:else}
-                        <img src= './images/footer/{menu.id}.svg' alt={menu.name}>
-                        <span>{menu.name}</span>
-                    {/if}
-                </button>
-            {/each}
-        {/key}
+        {#each menus as menu}
+            <button class="menu-item" on:click={() => onClicked(menu)}>
+                    <img src="./images/footer/{menu.id}{isActiveMenu(menu) ? '-active' : ''}.svg" alt={menu.name}>
+                    <span class="menu-active">{menu.name}</span>
+            </button>
+        {/each}
     </div>
 </div>
 
@@ -72,7 +66,7 @@
                 font-size: 10px;
                 color: #A1A1A1;
 
-                .menu-active {
+                &.active {
                     color: #377375;
                 }
             }

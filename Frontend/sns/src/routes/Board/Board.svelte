@@ -1,8 +1,9 @@
 <script>
     import Header from "../../Common/Header.svelte"
     import Footer from "../../Common/Footer.svelte"
-    import { clickOutside } from '../../js/clickOutside'
+    // import { clickOutside } from '../../js/clickOutside'
     import { push } from 'svelte-spa-router'
+    import Selectbox from "../../Common/Selectbox.svelte";
 
     // 임시 데이터
     const content = [
@@ -69,16 +70,18 @@
 
     let selectedFilter = filters['new']
     let isLiked = false
-    let expanded = false
+    // let expanded = false
     let selectedCategory = 'daily'
 
-    const handleClickFilter = () => expanded = !expanded
-    const handleClickFilterOption = (filter) => {
-        if(selectedFilter !== filters[filter]) expanded = false
-        selectedFilter = filters[filter]
-    }
-    const handleClickOutside = (event) => expanded = false
+    // const handleClickFilter = () => expanded = !expanded
+    // const handleClickFilterOption = (filter) => {
+    //     if(selectedFilter !== filters[filter]) expanded = false
+    //     selectedFilter = filters[filter]
+    // }
+    // const handleClickOutside = (event) => expanded = false
     const handleClickCategory = (category) => selectedCategory = category
+
+    const onChange = (option) => console.log(option)
 </script>
 
 <div class="board-root-container">
@@ -111,7 +114,8 @@
     </div>
     <div class="board-filter-area">
         <div class="filter-area">
-            <div class="filter-selected-area" use:clickOutside on:click_outside={handleClickOutside} aria-hidden="true">
+            <Selectbox options={['최신순', '좋아요순']} onChange={onChange}></Selectbox>
+            <!-- <div class="filter-selected-area" use:clickOutside on:click_outside={handleClickOutside} aria-hidden="true">
                 <div class="selected-area" on:click={handleClickFilter} aria-hidden="true">
                     <div class="selected">{selectedFilter}</div>
                     <img src='/images/bottomArrow.png' alt=''/>
@@ -122,7 +126,7 @@
                         <div class="filter-list" on:click={() => {handleClickFilterOption('like')}} aria-hidden='true'>좋아요순</div>
                     </div>
                 {/if}
-            </div>
+            </div> -->
             <div class="category-area">
                 <div class="category-item {selectedCategory === 'daily' && 'selected'}" on:click={() => {handleClickCategory('daily')}} aria-hidden='true'>일상</div>
                 <div class="category-item {selectedCategory === 'notice' && 'selected'}" on:click={() => {handleClickCategory('notice')}} aria-hidden='true'>공지사항</div>
@@ -291,52 +295,52 @@
                 justify-content: space-between;
                 align-items: center;
 
-                .filter-selected-area {
-                    position: relative;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    min-height: 18px;
+                // .filter-selected-area {
+                //     position: relative;
+                //     display: flex;
+                //     flex-direction: row;
+                //     align-items: center;
+                //     min-height: 18px;
 
-                    .selected-area {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                    }
+                //     .selected-area {
+                //         display: flex;
+                //         flex-direction: row;
+                //         align-items: center;
+                //     }
 
-                    img {
-                        width: 11px;
-                        height: 10px;
-                        margin-left: 2px;
-                    }
+                //     img {
+                //         width: 11px;
+                //         height: 10px;
+                //         margin-left: 2px;
+                //     }
 
-                    .selected {
-                        font-weight: 700;
-                        font-size: 12px;
-                        color: #737373;
-                    }
+                //     .selected {
+                //         font-weight: 700;
+                //         font-size: 12px;
+                //         color: #737373;
+                //     }
 
-                    .filter-list-area {
-                        position: absolute;
-                        top: 22px;
-                        z-index: 1;
-                        background: #fff;
-                        padding: 4px;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 4px;
-                        min-width: 80px;
-                        color: rgba(0, 0, 0, 0.87);
-                        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-                        border-radius: 4px;
-                        box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+                //     .filter-list-area {
+                //         position: absolute;
+                //         top: 22px;
+                //         z-index: 1;
+                //         background: #fff;
+                //         padding: 4px;
+                //         display: flex;
+                //         flex-direction: column;
+                //         gap: 4px;
+                //         min-width: 80px;
+                //         color: rgba(0, 0, 0, 0.87);
+                //         transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                //         border-radius: 4px;
+                //         box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
 
-                        .filter-list {
-                            font-size: 12px;
-                            color: #737373;
-                        }
-                    }
-                }
+                //         .filter-list {
+                //             font-size: 12px;
+                //             color: #737373;
+                //         }
+                //     }
+                // }
 
                 .category-area {
                     display: flex;

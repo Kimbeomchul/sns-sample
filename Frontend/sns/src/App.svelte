@@ -3,7 +3,7 @@
     import Modal from './Common/Modal.svelte'
     import Board from './routes/Board/Board.svelte'
     import BoardWrite from './routes/Board/BoardWrite.svelte'
-    // import BoardDetail from './routes/Board/BoardDetail.svelte'
+    import BoardDetail from './routes/Board/BoardDetail.svelte'
     import Chat from './routes/Chat.svelte'
     import Contact from './routes/Contact.svelte'
     import Init from './routes/Init.svelte'
@@ -23,6 +23,7 @@
     '/main': Main,
     '/board': Board,
     '/board/write': BoardWrite,
+    '/board/detail': BoardDetail,
     '/user': User,
     '/chat': Chat,
 }} />

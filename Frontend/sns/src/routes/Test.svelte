@@ -68,6 +68,9 @@
                 <div class="item button">
                     <button class="text" on:click={() => push('/chat')}>채팅</button>
                 </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/board/detail')}>게시판 상세</button>
+                </div>
             </div>
         </div>
         

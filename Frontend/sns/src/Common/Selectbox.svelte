@@ -1,7 +1,7 @@
 <script>
     import { clickOutside } from "../js/clickOutside"
 
-    export let options, onChange
+    export let options, onChange = null
 
     let expanded = false
     let selected = options[0]

@@ -2,6 +2,7 @@
     import { each } from "svelte/internal";
     import Footer from "../Common/Footer.svelte";
     import Header from "../Common/Header.svelte";
+    import Selectbox from "../Common/Selectbox.svelte";
     
     const filterOptions = ['전체', '카페', '음식점', '편의점', '가볼만한 곳', '청년창업']
     let selectedFilter = filterOptions[0]
@@ -16,7 +17,7 @@
         <div class="content">
             천 명의 과처니가 사랑한 카페
         </div>
-        <div class="hashtag-container">
+        <!-- <div class="hashtag-container">
             <div class="hashtag">#딸기</div>
             <div class="hashtag">#케이크</div>
             <div class="hashtag">#곰돌이곰돌이곰돌이</div>
@@ -25,7 +26,7 @@
             <div class="hashtag">#곰돌이</div>
             <div class="hashtag">#케이크</div>
             <div class="hashtag">#곰돌이</div>
-        </div>
+        </div> -->
         <div class="paging-wrapper">
             <div class="paging">1 / 3</div>
         </div>
@@ -37,11 +38,9 @@
             {/each}
         </div>
         <div class="main-board-order-container">
-            <div class="order-select">
-                거리순 ▼
-            </div>
+            <Selectbox options={['거리순', '추천순']}></Selectbox>
             <div class="near-container">
-                <img src="./images/track.svg">
+                <img src="./images/track.svg" alt="">
                 <span class="near">내 주변</span>
             </div>
         </div>
@@ -115,12 +114,13 @@
         }
 
         .main-board-container {
-            margin: 14px 10% 0px;
+            margin: 14px 6% 0px;
             
             .main-board-filter-container {
                 display: flex;
                 gap: 4px;
-                overflow: auto;
+                height: 30px;
+                overflow-x: auto;
 
                 .filter-item {
                     flex-shrink: 0;
@@ -152,21 +152,17 @@
 
             .main-board-order-container {
                 margin-top: 12px;
+                margin-left: 2px;
                 display: flex;
                 justify-content: space-between;
-
-                .order-select {
-                    font-weight: 700;
-                    font-size: 12px;
-                    color: #737373;
-
-                }
 
                 .near-container {
                     display: flex;
                     align-items: center;
 
                     .near {
+                        margin-left: 3px;
+                        margin-bottom: 1px;
                         font-weight: 500;
                         font-size: 11px;
                         letter-spacing: -0.05em;

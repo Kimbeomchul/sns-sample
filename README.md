@@ -11,5 +11,5 @@
 
 ## 팀 
  - 김범철 : BE / Flutter
- - 강명진 : BE
+ - 강명진 : BE / Infra(AWS)
  - 전주환 : FE

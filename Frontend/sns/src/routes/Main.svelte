@@ -1,8 +1,8 @@
 <script>
-    import { each } from "svelte/internal";
-    import Footer from "../Common/Footer.svelte";
-    import Header from "../Common/Header.svelte";
-    import Selectbox from "../Common/Selectbox.svelte";
+    import Carousel from "../Common/Carousel.svelte"
+    import Footer from "../Common/Footer.svelte"
+    import Header from "../Common/Header.svelte"
+    import Selectbox from "../Common/Selectbox.svelte"
     
     const filterOptions = ['전체', '카페', '음식점', '편의점', '가볼만한 곳', '청년창업']
     let selectedFilter = filterOptions[0]
@@ -10,25 +10,60 @@
 
 <div class="main-root-container">
     <Header header='과처니' search=true></Header>
-    <div class="main-recommand-container">
-        <div class="title">
-            올 겨울엔 딸기 카페 어때요?
+    <Carousel totalPageCount=3>
+        <div class="main-recommand-container">
+            <div class="title">
+                올 겨울엔 딸기 카페 어때요?
+            </div>
+            <div class="content">
+                천 명의 과처니가 사랑한 카페
+            </div>
+            <div class="hashtag-container">
+                <div class="hashtag">#딸기</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이곰돌이곰돌이</div>
+                <div class="hashtag">#딸기</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이</div>
+            </div>
         </div>
-        <div class="content">
-            천 명의 과처니가 사랑한 카페
+        <div class="main-recommand-container">
+            <div class="title">
+                올 겨울엔 딸기 카페 어때요?
+            </div>
+            <div class="content">
+                천 명의 과처니가 사랑한 카페
+            </div>boar
+            <div class="hashtag-container">
+                <div class="hashtag">#딸기</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이곰돌이곰돌이</div>
+            </div>
+
         </div>
-        <!-- <div class="hashtag-container">
-            <div class="hashtag">#딸기</div>
-            <div class="hashtag">#케이크</div>
-            <div class="hashtag">#곰돌이곰돌이곰돌이</div>
-            <div class="hashtag">#딸기</div>
-            <div class="hashtag">#케이크</div>
-            <div class="hashtag">#곰돌이</div>
-            <div class="hashtag">#케이크</div>
-            <div class="hashtag">#곰돌이</div>
-        </div> -->
-        <div class="paging-wrapper">
-            <div class="paging">1 / 3</div>
+        <div class="main-recommand-container">
+            <div class="title">
+                올 겨울엔 딸기 카페 어때요?
+            </div>
+            <div class="content">
+                천 명의 과처니가 사랑한 카페
+            </div>
+            <div class="hashtag-container">
+                <div class="hashtag">#딸기</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이곰돌이곰돌이</div>
+                <div class="hashtag">#딸기</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이</div>
+                <div class="hashtag">#케이크</div>
+                <div class="hashtag">#곰돌이</div>
+            </div>
         </div>
     </Carousel>
     <div class="main-content-container">
@@ -108,7 +143,7 @@
         margin-bottom: 97px;
 
         .main-recommand-container {
-            padding: 37px 13px 10px 20px;
+            padding: 37px 13px 4px 20px;
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/main-sample.png');
             color: #FFFFFF;
 
@@ -129,6 +164,7 @@
             }
 
             .hashtag-container {
+                padding-bottom: 62px;
                 margin-top: 10px;
                 display: flex;
                 flex-wrap: wrap;
@@ -146,25 +182,6 @@
                     text-align: center;
                     letter-spacing: -0.05em;
 
-                }
-            }
-
-            .paging-wrapper {
-                display: flex;
-                justify-content: flex-end;
-                margin-top: 42px;
-                min-width: 40px;
-
-                .paging {
-                    padding: 2px 12px;
-                    border: 1px solid #616668;
-                    border-radius: 11.5px;
-                    font-weight: 500;
-                    font-size: 9px;
-                    text-align: center;
-                    letter-spacing: -0.05em;
-                    color: #E2E2E2;
-                    background: rgba(97, 102, 104, 0.7);
                 }
             }
         }

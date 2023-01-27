@@ -30,27 +30,83 @@
         <div class="paging-wrapper">
             <div class="paging">1 / 3</div>
         </div>
-    </div>
-    <div class="main-board-container">
-        <div class="main-board-filter-container">
+    </Carousel>
+    <div class="main-content-container">
+        <div class="board-filter-container">
             {#each filterOptions as option}
                 <button class="filter-item" class:selected={selectedFilter === option} on:click={() => selectedFilter = option}>{option}</button>
             {/each}
         </div>
-        <div class="main-board-order-container">
+        <div class="board-order-container">
             <Selectbox options={['거리순', '추천순']}></Selectbox>
             <div class="near-container">
                 <img src="./images/track.svg" alt="">
                 <span class="near">내 주변</span>
             </div>
         </div>
-
+        
+        <div class="board-list-container">
+            <div class="board-container">
+                <img class="board-image" src="/images/board/board.png" alt="">
+                <div class="board-info-container">
+                    <div class="title-container">
+                        <span class="title">
+                            오로라 커피오로라 커피오로라 커피오로라 커피
+                        </span>
+                        <span class="category">
+                            카페/디저트
+                        </span>
+                    </div>
+                    <span class="operating-hours">
+                        매주 일요일 휴무
+                    </span>
+                    <div class="etc-menu-list-container">
+                        <div class="etc-menu-container">
+                            <img src="/images/board/distance.svg" alt="">
+                            <span class="amount">790m</span>
+                        </div>
+                        <div class="etc-menu-container">
+                            <img src="/images/board/heart.svg" alt="">
+                            <span class="amount">1,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="board-container">
+                <img class="board-image" src="/images/board/board.png" alt="">
+                <div class="board-info-container">
+                    <div class="title-container">
+                        <span class="title">
+                            오로라 커피
+                        </span>
+                        <span class="category">
+                            카페/디저트
+                        </span>
+                    </div>
+                    <span class="operating-hours">
+                        매주 일요일 휴무
+                    </span>
+                    <div class="etc-menu-list-container">
+                        <div class="etc-menu-container">
+                            <img src="/images/board/distance.svg" alt="">
+                            <span class="amount">790m</span>
+                        </div>
+                        <div class="etc-menu-container">
+                            <img src="/images/board/heart.svg" alt="">
+                            <span class="amount">1,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <Footer></Footer>
 </div>
 
 <style lang="scss">
     .main-root-container {
+        margin-bottom: 97px;
+
         .main-recommand-container {
             padding: 37px 13px 10px 20px;
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/main-sample.png');
@@ -113,13 +169,13 @@
             }
         }
 
-        .main-board-container {
-            margin: 14px 6% 0px;
+        .main-content-container {
+            margin: 14px 6% 0;
             
-            .main-board-filter-container {
+            .board-filter-container {
                 display: flex;
                 gap: 4px;
-                height: 30px;
+                height: 22px;
                 overflow-x: auto;
 
                 .filter-item {
@@ -146,11 +202,11 @@
                 }
 
                 &::-webkit-scrollbar {
-                display: none;
+                    display: none;
                 }
             }
 
-            .main-board-order-container {
+            .board-order-container {
                 margin-top: 12px;
                 margin-left: 2px;
                 display: flex;
@@ -169,6 +225,86 @@
                         color: #616668;
                     }
                 }
+            }
+
+            .board-list-container {
+                margin-top: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+                
+                .board-container {
+                    width: 100%;
+                    max-width: 300px;
+                    // height: 238px;
+                    border: 1.7px solid #FFFFFF;
+                    border-radius: 10px;
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                    overflow: hidden;
+                    
+                    .board-image {
+                        height: 153px;
+                        width: 100%;
+                    }
+    
+                    .board-info-container {
+                        margin: 17px 14px 12px 20px;
+
+                        .title-container {
+                            display: flex;
+                            align-items: center;
+                            
+                            .title {
+                                font-family: 'Inter';
+                                font-weight: 700;
+                                font-size: 20px;
+                                line-height: 24px;
+                                max-width: 70%;
+                                display: block;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+    
+                            .category {
+                                margin-left: 7px;
+                                font-size: 10px;
+                                line-height: 14px;
+                                color: #6C6C6C;
+                            }
+                        }
+
+                        .operating-hours {
+                            font-weight: 500;
+                            font-size: 12.5px;
+                            color: #AFAFAF;
+                        }
+    
+                        .etc-menu-list-container {
+                            display: flex;
+                            justify-content: flex-end;
+                            gap: 10px;
+
+                            .etc-menu-container {
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+
+                                .amount {
+                                    font-weight: 700;
+                                    font-size: 14px;
+                                    line-height: 20px;
+                                    letter-spacing: -0.05em;
+    
+                                    color: #AFAFAF;
+                                }
+                            }
+
+                        }
+                    }
+                    }
+
             }
         }
     }

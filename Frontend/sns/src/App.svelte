@@ -10,6 +10,7 @@
     import Join from './routes/Join.svelte'
     import Login from './routes/Login.svelte'
     import Main from './routes/Main.svelte'
+    import Review from './routes/Review.svelte'
     import Test from './routes/Test.svelte'
     import User from './routes/User.svelte'
 </script>
@@ -21,6 +22,7 @@
     '/join': Join,
     '/contact': Contact,
     '/main': Main,
+    '/review': Review,
     '/board': Board,
     '/board/write': BoardWrite,
     '/board/detail': BoardDetail,

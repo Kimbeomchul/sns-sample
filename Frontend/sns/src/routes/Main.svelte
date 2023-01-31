@@ -10,7 +10,7 @@
 
 <div class="main-root-container">
     <Header header='과처니' search=true></Header>
-    <Carousel totalPageCount=3>
+    <Carousel>
         <div class="main-recommand-container">
             <div class="title">
                 올 겨울엔 딸기 카페 어때요?
@@ -35,7 +35,7 @@
             </div>
             <div class="content">
                 천 명의 과처니가 사랑한 카페
-            </div>boar
+            </div>
             <div class="hashtag-container">
                 <div class="hashtag">#딸기</div>
                 <div class="hashtag">#케이크</div>

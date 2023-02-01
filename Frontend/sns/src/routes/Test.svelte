@@ -6,17 +6,11 @@
     let showModal = false
 
     const token = new URLSearchParams(location.search).get('code')
-    // token && alert(token)
-
-    // if(token) {
-    //     axios(`http://localhost:8081/api/v1/users/auth/kakao/callback?code=` + token)
-    // }
 
     const onKakaoLogin = () => {
         Kakao.Auth.authorize({
-            // redirectUri: 'http://localhost:8080',
             redirectUri: 'http://localhost:8081/api/v1/users/auth/kakao/callback',
-            // prompts: 'login',
+            prompts: 'login',
         })
     }
     const onNaverLogin = () => {
@@ -57,10 +51,28 @@
                     <button class="text" on:click={() => push('/join')}>회원가입</button>
                 </div>
                 <div class="item button">
+                    <button class="text" on:click={() => push('/main')}>메인</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/review')}>리뷰</button>
+                </div>
+                <div class="item button">
                     <button class="text" on:click={() => push('/contact')}>문의하기</button>
                 </div>
                 <div class="item button">
                     <button class="text" on:click={() => push('/board')}>게시판</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/user')}>내정보</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/board/write')}>게시판 글쓰기</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/chat')}>채팅</button>
+                </div>
+                <div class="item button">
+                    <button class="text" on:click={() => push('/board/detail')}>게시판 상세</button>
                 </div>
             </div>
         </div>

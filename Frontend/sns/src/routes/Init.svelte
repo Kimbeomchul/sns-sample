@@ -7,9 +7,9 @@
         <div class="logo">과처니</div>
     </div>
     <div class="social-login-container">
-        <img class="login_button" src="./images/카카오로그인.svg" alt="">
-        <img class="login_button" src="./images/네이버로그인.svg" alt="">
-        <img class="login_button" src="./images/이메일로그인.svg" alt="">
+        <img class="login_button" src="./images/login/kakao.svg" alt="">
+        <img class="login_button" src="./images/login/naver.svg" alt="">
+        <img class="login_button" src="./images/login/email.svg" alt="">
         <div class="contact-wrapper">
             <div class="contact">로그인이 안돼요</div>
         </div>

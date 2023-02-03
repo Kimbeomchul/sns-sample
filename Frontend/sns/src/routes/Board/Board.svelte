@@ -159,7 +159,7 @@
         {/each}
     </div>
     <div class="border-write-button" on:click={() => push('/board/write')} aria-hidden='true'>+</div>
-    <Footer />
+    <Footer activedMenuIndex=1/>
 </div>
 
 <style lang="scss">

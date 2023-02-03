@@ -8,7 +8,7 @@
             name: '홈'
         },
         {
-            id: 'community',
+            id: 'board',
             name: '커뮤니티'
         },
         {
@@ -36,7 +36,7 @@
         {#each menus as menu}
             <button class="menu-item" on:click={() => onClicked(menu)}>
                     <img src="./images/footer/{menu.id}{isActiveMenu(menu) ? '-active' : ''}.svg" alt={menu.name}>
-                    <span class="menu-active">{menu.name}</span>
+                    <span class="name{isActiveMenu(menu) ? ' active' : ''}">{menu.name}</span>
             </button>
         {/each}
     </div>
@@ -66,9 +66,15 @@
                 font-size: 10px;
                 color: #A1A1A1;
 
-                &.active {
-                    color: #377375;
+                .name {
+                    line-height: 14px;
+                    letter-spacing: -0.05em;
+
+                    &.active {
+                        color: #377375;
+                    }
                 }
+
             }
 
         }

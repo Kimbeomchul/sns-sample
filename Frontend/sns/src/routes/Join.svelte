@@ -163,7 +163,7 @@
 
             .join-button {
                 width: 100%;
-                margin-top: 90px;
+                margin-top: 56px;
                 border-radius: 27px;
                 background-color: #377375;
                 height: 53px;

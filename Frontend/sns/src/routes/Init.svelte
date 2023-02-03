@@ -1,4 +1,19 @@
 <script>
+    import { push, querystring } from "svelte-spa-router";
+    import { ROUTE } from '../Common/constant'
+
+    const onKakaoLogin = () => {
+        Kakao.Auth.authorize({
+            redirectUri: 'http://localhost:8081/api/v1/users/auth/kakao/callback',
+            // prompts: 'login',
+        })
+    }
+
+    const onNaverLogin = () => {
+        const naverLoginButton = document.getElementById('naver_id_login_anchor')
+        naverLoginButton.click()
+    }
+
 </script>
 
 <div class="init-root-container">
@@ -7,12 +22,18 @@
         <div class="logo">과처니</div>
     </div>
     <div class="social-login-container">
-        <img class="login_button" src="./images/login/kakao.svg" alt="">
-        <img class="login_button" src="./images/login/naver.svg" alt="">
-        <img class="login_button" src="./images/login/email.svg" alt="">
-        <div class="contact-wrapper">
-            <div class="contact">로그인이 안돼요</div>
-        </div>
+        <button on:click={onKakaoLogin}>
+            <img class="login_button" src="./images/login/kakao.svg" alt="">
+        </button>
+        <button on:click={onNaverLogin}>
+            <img class="login_button" src="./images/login/naver.svg" alt="">
+        </button>
+        <button on:click={() => push(ROUTE.LOGIN)}>
+            <img class="login_button" src="./images/login/email.svg" alt="">
+        </button>
+        <button class="contact-wrapper" on:click={() => push(ROUTE.CONTACT)}>
+            <span class="contact">로그인이 안돼요</span>
+        </button>
     </div>
 </div>
 
@@ -41,21 +62,18 @@
             max-width: 318px;
             margin-top: 100px;
             
-            .login_button {
-                margin-top: 10px;
-            }
-
             .contact-wrapper {
-    
+                width: 100%;
+                margin-top: 13px;
+                margin-right: 10px;
+                text-align: end;
+
                 .contact {
-                    margin-top: 13px;
-                    margin-right: 10px;
-                    font-weight: 500;
+                    font-weight: 700;
                     font-size: 13px;
                     line-height: 19px;
                     letter-spacing: -0.05em;
                     color: #A8A8A8;
-                    text-align: end;
                 }
             }
         }

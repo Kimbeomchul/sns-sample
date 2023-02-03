@@ -1,4 +1,6 @@
 <script>
+    import { push } from "svelte-spa-router";
+    import { ROUTE } from "../Common/constant";
     import Header from "../Common/Header.svelte"
 </script>
 
@@ -21,7 +23,9 @@
             </div>
         </div>
         <div class="join-warp">
-            <span class="button join">회원가입 하기</span>
+            <button on:click={() => push(ROUTE.JOIN)}>
+                <span class="button join">회원가입 하기</span>
+            </button>
         </div>
         <div class="button login-button">
             <span>로그인</span>

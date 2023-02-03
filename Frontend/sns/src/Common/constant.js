@@ -12,3 +12,7 @@ export const ROUTE = {
     USER: '/user',
     CHAT: '/chat',
 }
+
+export const API = {
+    JOIN: 'user/join'
+}

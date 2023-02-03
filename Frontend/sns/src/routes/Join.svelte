@@ -1,11 +1,19 @@
 <script>
     import axios from "axios";
     import Header from "../Common/Header.svelte"
+    import { API } from "../Common/constant"
+    import * as apiService from "../js/apiService";
 
     let id = 'joohwan', password = '1234', nickName = '주환'
 
     const join = () => {
-        axios.post('http://localhost:8081/api/v1/users/join', {
+        const params = {
+            userName: id,
+            password,
+            nickName
+        }
+        apiService.toPost(API.JOIN, params)
+        axios.post(API.JOIN, {
             userName: id,
             password,
             nickName

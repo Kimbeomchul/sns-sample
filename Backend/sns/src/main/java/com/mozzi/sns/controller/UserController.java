@@ -57,7 +57,7 @@ public class UserController {
     public RedirectView kakaoUser(@RequestParam("code") String code){
         RedirectView rv = new RedirectView();
         String token = userService.kakaoToken(code);
-        rv.setUrl("http://localhost:8080?token="+token);
+        rv.setUrl("http://localhost:8080/#/init?token="+token);
         return rv;
     }
 
@@ -66,7 +66,7 @@ public class UserController {
     public RedirectView naverUser(@RequestParam("code") String code){
         RedirectView rv = new RedirectView();
         String token = userService.kakaoToken(code);
-        rv.setUrl("http://localhost:8080?token="+token);
+        rv.setUrl("http://localhost:8080/#/init?token="+token);
         return rv;
     }
 }

@@ -14,5 +14,6 @@ export const ROUTE = {
 }
 
 export const API = {
-    JOIN: 'user/join'
+    JOIN: 'user/join',
+    GET_BOARD: 'posts',
 }

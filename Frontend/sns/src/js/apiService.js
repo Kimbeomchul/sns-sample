@@ -8,27 +8,30 @@ let instance = axios.create({
     }
 });
 
-const toRequest = (url, method, params) => {
+const toRequest = (url, method, params, showAlert = false) => {
     const axiosOptions = {
         url,
         method,
         [method.toUpperCase() === 'GET' ? 'params' : 'body'] : params,
         headers: {
-            Authorization: `bearer ${localStorage.getItem('access_token')}`
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`
         }
     }
     
     return instance.request(axiosOptions)
-                //    .then(successHandler)
+                   .then(response => successHandler(response, showAlert))
+                   .catch(response => failHandler(response, showAlert))
 }
 
-const successHandler = response => {
-    console.log(response)
+const successHandler = (response, showAlert) => {
+    if(response === 'OK') {
+        return Promise.resolve(response)
+    }
 }
 
-const failHandler = response => {
-    console.log(response)
+const failHandler = (response, showAlert) => {
+    return Promise.reject(response)
 }
 
-export const toGet = (url, params) => toRequest(url, 'GET', params)
-export const toPost = (url, params) => toRequest(url, 'POST', params)
+export const toGet = (url, params) => toRequest(url, 'GET', params, showAlert)
+export const toPost = (url, params) => toRequest(url, 'POST', params, showAlert)

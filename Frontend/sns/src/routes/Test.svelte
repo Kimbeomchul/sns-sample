@@ -1,7 +1,9 @@
 <script>
     import axios from 'axios'
     import { push } from 'svelte-spa-router'
+    import { API } from '../Common/constant';
     import Modal from '../Common/Modal.svelte'
+    import { toGet } from '../js/apiService';
 
     let showModal = false
     const token = new URLSearchParams(location.search).get('code')
@@ -15,6 +17,13 @@
     const onNaverLogin = () => {
         const naverLoginButton = document.getElementById('naver_id_login_anchor')
         naverLoginButton.click()
+    }
+
+    const callGetBoardAPI = () => {
+        toGet('questions')
+        // axios('http://localhost:8081/api/v1/posts', options)
+        //      .then(res => console.log(res))
+        //      .catch(res => console.log(res))
     }
 
 
@@ -66,15 +75,22 @@
         </div>
         
         <div class="row">
+            <div class="title">API 테스트</div>
+            <div class="item-container">
+                <div class="item button">
+                    <button class="text" on:click={() => callGetBoardAPI()}>게시판조회API</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="title">컴포넌트</div>
             <div class="item-container">
                 <div class="item button">
                     <button class="text" on:click={() => showModal = true}>팝업 호출</button>
                 </div>
             </div>
-            
         </div>
-        
 
         <div class="row">
             <div class="title">로그인</div>

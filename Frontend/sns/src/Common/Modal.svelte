@@ -1,29 +1,64 @@
-<script>
-	export let text = '실패했습니다.'
-    import { createEventDispatcher, onDestroy } from 'svelte'
+<script context="module">
+    let Test
+    let scrollY
+    let prevBodyPosition
+    let prevBodyOverflow
+    let prevBodyWidth
+    export const open = component => {
+        Test = component
+        disableScroll()
+    }
 
+    const disableScroll = () => {
+        scrollY = window.scrollY
+        prevBodyPosition = document.body.style.position
+        prevBodyOverflow = document.body.style.overflow
+        prevBodyWidth = document.body.style.width
+        document.body.style.position = 'fixed'
+        document.body.style.top = `-${scrollY}px`
+        document.body.style.overflow = 'hidden'
+        document.body.style.width = '100%'
+    }
+</script>
+
+<script>
+	// export let text = '실패했습니다.'
+    import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+	
     let background;
+
+    const enableScroll = () => {
+        document.body.style.position = prevBodyPosition || ''
+        document.body.style.top = ''
+        document.body.style.overflow = prevBodyOverflow || ''
+        document.body.style.width = prevBodyWidth || ''
+        window.scrollTo(0, scrollY)
+    };
 
 	const dispatch = createEventDispatcher()
 	const close = () => dispatch('close')
+    let isMount = false
 
-    onDestroy(() => console.log('destroy'))
+    $: {
+        if (isMount) {
+            open()
+        }
+    }
+    onMount(() => isMount = true)
+    onDestroy(() => isMount = false)
 </script>
 
-<div class="modal-root-container">
-    <button class="modal-background" bind:this={background} on:click={() => close()}/>
-    <div class="modal-body-container">
-        <div class="modal-body">
-            <!-- <div class="image">😎</div> -->
-            <img src="https://cdn3.emoji.gg/emojis/7882-peepo-ban.png" width="128px" height="128px" alt="peepo_ban">
-            <div class="content">{text}</div>
-        </div>
-        <button class="modal-footer" on:click={() => close()}>
-            확인
-        </button>
-    </div>
+{#if Test}
     
-</div>
+    <div class="modal-root-container">
+        <button class="modal-background" bind:this={background} on:click={() => close()}/>
+        <div class="modal-body-container">
+            asdf
+            <!-- <Test /> -->
+            <svelte:component this={Test}/>
+        </div>
+    </div>
+{/if}
 
 <style lang="scss">
     .modal-root-container {
@@ -39,38 +74,13 @@
         }
 
         .modal-body-container {
-            position: absolute;
+            position: fixed;
             bottom: 0px;
             border-radius: 20px 20px 0px 0px;
             height: 400px;
             width: 100%;
             background-color: #FFFFFF;
 
-        }
-        
-        .modal-body {
-            height: 360px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-weight: 700;
-
-            .content {
-                margin-top: 20px;
-            }
-        }
-        
-        .modal-footer {
-            height: 43px;
-            background-color: #377375;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 700;
-            font-size: 14px;
-            color: #FFFFFF;
-            width: 100%;
         }
     }
 </style>

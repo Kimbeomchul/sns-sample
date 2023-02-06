@@ -54,7 +54,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         // whiteList 체크
         final String requestURI = request.getRequestURI();
         // 토큰 존재여부 체크
-        final String header = request.getHeader("authorization");
+        final String header = request.getHeader("Authorization");
 
         if(whiteListMatcher(requestURI)){
             filterChain.doFilter(request, response);

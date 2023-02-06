@@ -156,7 +156,7 @@ public class UserService {
         Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.getJSONObject("response").get("id").toString());
         if(id.isEmpty()) {
             // 회원가입 진행
-            UserEntity registerNaver = UserEntity.of(String.valueOf(joInfo.getJSONObject("response").get("id")), bCryptPasswordEncoder.encode("Gwacheon2NaverLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("response").get("profile_image")), SocialType.KAKAO);
+            UserEntity registerNaver = UserEntity.of(String.valueOf(joInfo.getJSONObject("response").get("id")), bCryptPasswordEncoder.encode("Gwacheon2NaverLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("response").get("profile_image")), SocialType.NAVER);
             userEntityRepository.saveAndFlush(registerNaver);
         }
 
@@ -201,7 +201,7 @@ public class UserService {
         Optional<UserEntity> id = userEntityRepository.findByUserName(joInfo.get("id").toString());
         if(id.isEmpty()) {
             // 회원가입 진행
-            UserEntity registerKakao = UserEntity.of(String.valueOf(joInfo.get("id")), bCryptPasswordEncoder.encode("Gwacheon2KakaoLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("properties").get("profile_image")),  SocialType.NAVER);
+            UserEntity registerKakao = UserEntity.of(String.valueOf(joInfo.get("id")), bCryptPasswordEncoder.encode("Gwacheon2KakaoLogin"), CommonUtils.randomNickname(), String.valueOf(joInfo.getJSONObject("properties").get("profile_image")),  SocialType.KAKAO);
             userEntityRepository.saveAndFlush(registerKakao);
         }
         return login(joInfo.get("id").toString(), "Gwacheon2KakaoLogin");

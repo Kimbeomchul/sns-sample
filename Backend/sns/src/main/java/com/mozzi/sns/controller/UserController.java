@@ -65,7 +65,7 @@ public class UserController {
     @GetMapping("/auth/naver/callback")
     public RedirectView naverUser(@RequestParam("code") String code){
         RedirectView rv = new RedirectView();
-        String token = userService.kakaoToken(code);
+        String token = userService.naverToken(code);
         rv.setUrl("http://localhost:8080/#/init?token="+token);
         return rv;
     }

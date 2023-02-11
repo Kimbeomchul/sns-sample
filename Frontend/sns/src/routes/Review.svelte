@@ -1,5 +1,8 @@
 <script>
     import Header from "../Common/Header.svelte"
+    import Popup from "../Common/Popup.svelte";
+
+    let isPopupOpen = false
 </script>
 
 <div class="review-root-container">
@@ -7,7 +10,7 @@
     <div class="review-wrapper">
         <div class="review-area">
             <div class="user-info">
-                <img class="profile" src='https://pbs.twimg.com/media/FdFxDv2aEAMqRfK?format=jpg&name=large' alt=''/>
+                <img class="profile" on:click={() => isPopupOpen = true} src='https://pbs.twimg.com/media/FdFxDv2aEAMqRfK?format=jpg&name=large' alt='' aria-hidden="true"/>
                 <div class="review-info">
                     <div class="review-info-top">
                         <div class="name">과천예솔맘</div>
@@ -48,6 +51,7 @@
             <img class="review-more" src='/images/more-gray.png' alt='' />
         </div>
     </div>
+    <Popup bind:isPopupOpen />
 </div>
 
 <style lang="scss">

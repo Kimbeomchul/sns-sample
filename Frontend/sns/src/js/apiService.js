@@ -1,6 +1,6 @@
 import axios from "axios"
 
-let instance = axios.create({
+const instance = axios.create({
     baseURL: 'http://localhost:8081/api/v1/',
     headers: {
         'Content-Type': 'application/json',
@@ -33,5 +33,5 @@ const failHandler = (response, showAlert) => {
     return Promise.reject(response)
 }
 
-export const toGet = (url, params) => toRequest(url, 'GET', params, showAlert)
-export const toPost = (url, params) => toRequest(url, 'POST', params, showAlert)
+export const toGet = (url, params, showAlert) => toRequest(url, 'GET', params, showAlert)
+export const toPost = (url, params, showAlert) => toRequest(url, 'POST', params, showAlert)
